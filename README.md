@@ -26,3 +26,16 @@ The role this cmdlet belongs to
 .FUNCTIONALITY
 The functionality that best describes this cmdlet
 #>
+
+# Set-ExecutionPolicy
+
+Policy automatically resets if you close the ps window.
+Policy is only active in this ps instance.
+´Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process´
+
+# Import Modules
+
+´Get-Module´
+´Import-Module "./string-converter.psd1" -Force´
+
+´Remove-Module ps-string-converter´

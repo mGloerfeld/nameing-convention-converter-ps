@@ -25,9 +25,9 @@ function ConvertTo-KebabCase {
 
     # Remove all leading, colseing and multiple whitespaces in text. 
     $Text = $Text -replace '(\s+)',' '
-    $Parts = $Text.Trim().Split(" ").ToLower();
+    $Parts = $Text.Trim().ToLower().Split(" ");
 
     return [string]::Join("-", $Parts);      
 }
 
- Export-ModuleMember -Function ConvertTo-KebabCase  
+Export-ModuleMember -Function ConvertTo-KebabCase

@@ -10,11 +10,11 @@
 .INPUTS
    Any string like 'Unified Canadian Aboriginal Syllabics'
 .OUTPUTS
-   An converted string like 'unified-canadian-aboriginal-syllabics'
+   An converted string like 'UnifiedCanadianAboriginalSyllabics'
 .NOTES
    Removes all leading, closing and double whitespaces.
 #>
-function ConvertTo-UpperCamelCase {
+function ConvertTo-LowerCamelCase {
     param (
         [string]$Text
     )
@@ -25,10 +25,22 @@ function ConvertTo-UpperCamelCase {
 
     # Remove all leading, colseing and multiple whitespaces in text. 
     $Text = $Text -replace '(\s+)',' '
-    $Parts = $Text.Trim().Split(" ").ToLower();
+    $Parts = $Text.Trim().Split(" ");
+    $capitalizedWords="";
 
-    # return [string]::Join("-", $Parts);     
-    return "Hello World!"       
+    For ($i=0; $i -lt  $Parts.Count; $i++) {
+     
+      if($i -eq 0){
+          $capitalizedWords += $($Parts[$i].Substring(0,1).ToLower() +  $Parts[$i].Substring(1).ToLower());
+      }else {
+           $capitalizedWords += $($Parts[$i].Substring(0,1).ToUpper() + $Parts[$i].Substring(1).ToLower());
+      }
+      
+   }
+  
+     return [string]::Join("", $capitalizedWords);     
 }
 
- Export-ModuleMember -Function ConvertTo-UpperCamelCase  
+Export-ModuleMember -Function ConvertTo-LowerCamelCase
+
+ 
