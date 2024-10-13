@@ -14,7 +14,7 @@
 .NOTES
    Removes all leading, closing and double whitespaces.
 #>
-function ConvertTo-CamelCase {
+function ConvertTo-LowerCamelCase {
     param (
         [string]$Text
     )
@@ -26,13 +26,21 @@ function ConvertTo-CamelCase {
     # Remove all leading, colseing and multiple whitespaces in text. 
     $Text = $Text -replace '(\s+)',' '
     $Parts = $Text.Trim().Split(" ");
+    $capitalizedWords="";
 
-   # Capitalize the first letter of each word
-    $capitalizedWords = $Parts | ForEach-Object {
-      $_.Substring(0,1).ToUpper() + $_.Substring(1).ToLower()
-   } 
-
+    For ($i=0; $i -lt  $Parts.Count; $i++) {
+     
+      if($i -eq 0){
+          $capitalizedWords += $($Parts[$i].Substring(0,1).ToLower() +  $Parts[$i].Substring(1).ToLower());
+      }else {
+           $capitalizedWords += $($Parts[$i].Substring(0,1).ToUpper() + $Parts[$i].Substring(1).ToLower());
+      }
+      
+   }
+  
      return [string]::Join("", $capitalizedWords);     
 }
 
-Export-ModuleMember -Function ConvertTo-CamelCase
+Export-ModuleMember -Function ConvertTo-LowerCamelCase
+
+ 

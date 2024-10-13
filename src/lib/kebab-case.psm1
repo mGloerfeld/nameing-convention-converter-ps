@@ -2,7 +2,7 @@
 .Synopsis
    Convert text into KebabCase. 
 .DESCRIPTION
-   Converts any text into Kebab Case notation. Unnecessary spaces are filtered out.
+   kebab-case: Wörter werden durch Bindestriche getrennt und alle Buchstaben sind klein. Beispiel: kebab-case-beispiel.
 .EXAMPLE
    ConvertTo-KebabCase("Unified Canadian Aboriginal Syllabics")
 .EXAMPLE
