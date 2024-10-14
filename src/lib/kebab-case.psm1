@@ -2,9 +2,9 @@
 .Synopsis
    Convert text into KebabCase. 
 .DESCRIPTION
-   kebab-case: Wörter werden durch Bindestriche getrennt und alle Buchstaben sind klein. Beispiel: kebab-case-beispiel.
+   Converts any text into KebabCase notation. Unnecessary spaces are filtered out.
 .EXAMPLE
-   ConvertTo-KebabCase("Unified Canadian Aboriginal Syllabics")
+   ConvertTo-KebabCase(" ")
 .EXAMPLE
    Another example of how to use this cmdlet
 .INPUTS
@@ -19,7 +19,7 @@ function ConvertTo-KebabCase {
         [string]$Text
     )
 
-    if ([string]::IsNullOrEmpty($Text)) {
+    if ([string]::IsNullOrEmpty($Text) -or [string]::IsNullOrWhiteSpace($Text)) {
         return $Text
     }
 

@@ -1,16 +1,14 @@
 <#
 .Synopsis
-   Convert text into Camel Case. 
+   Converts text into ScreamingSnakeCase. 
 .DESCRIPTION
-   SCREAMING_SNAKE_CASE: Ähnlich wie snake_case, aber alle Buchstaben sind großgeschrieben. Beispiel: SCREAMING_SNAKE_CASE_BEISPIEL.
+   Converts any text into ScreamingSnakeCase notation. Unnecessary spaces are filtered out.
 .EXAMPLE
-   ConvertTo-Upper-ScreamingSnakeCase("Unified Canadian Aboriginal Syllabics")
-.EXAMPLE
-   Another example of how to use this cmdlet
+   ConvertTo-ScreamingSnakeCase "Hello world!" 
 .INPUTS
-   Any string like 'Unified Canadian Aboriginal Syllabics'
+   Any string like 'Hello world!'.
 .OUTPUTS
-   An converted string like 'UnifiedCanadianAboriginalSyllabics'
+   An converted string like 'HelloWorld!'
 .NOTES
    Removes all leading, closing and double whitespaces.
 #>
@@ -18,21 +16,25 @@ function ConvertTo-ScreamingSnakeCase {
     param (
         [string]$Text
     )
-
-    if ([string]::IsNullOrEmpty($Text)) {
+ 
+    if ([string]::IsNullOrEmpty($Text) -or [string]::IsNullOrWhiteSpace($Text)) {
         return $Text
     }
 
     # Remove all leading, colseing and multiple whitespaces in text. 
     $Text = $Text -replace '(\s+)',' '
     $Parts = $Text.Trim().Split(" ");
+    $capitalizedWords="";
 
-   # Capitalize the first letter of each word
-    $capitalizedWords = $Parts | ForEach-Object {
-      $_.Substring(0,1).ToUpper() + $_.Substring(1).ToLower()
-   } 
-
-     return -join $capitalizedWords  
+    For ($i=0; $i -lt  $Parts.Count; $i++) {
+     
+      if($i -eq 0){
+          $capitalizedWords += $($Parts[$i].Substring(0,1).ToLower() +  $Parts[$i].Substring(1).ToLower());
+      }else {
+           $capitalizedWords += $($Parts[$i].Substring(0,1).ToUpper() + $Parts[$i].Substring(1).ToLower());
+      }
+   }
+     return [string]::Join("", $capitalizedWords);     
 }
 
 Export-ModuleMember -Function ConvertTo-ScreamingSnakeCase
