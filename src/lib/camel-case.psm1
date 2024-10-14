@@ -1,25 +1,23 @@
 <#
 .Synopsis
-   Convert text into Camel Case. 
+   Converts text into CamelCase. 
 .DESCRIPTION
-   Converts any text into Kebab Case notation. Unnecessary spaces are filtered out.
+   Converts any text into camelCase notation. Unnecessary spaces are filtered out.
 .EXAMPLE
-   ConvertTo-Upper-CamelCase("Unified Canadian Aboriginal Syllabics")
-.EXAMPLE
-   Another example of how to use this cmdlet
+   ConvertTo-CamelCase "Hello world!" 
 .INPUTS
-   Any string like 'Unified Canadian Aboriginal Syllabics'
+   Any string like 'Hello world!'.
 .OUTPUTS
-   An converted string like 'UnifiedCanadianAboriginalSyllabics'
+   An converted string like 'HelloWorld!'
 .NOTES
    Removes all leading, closing and double whitespaces.
 #>
-function ConvertTo-LowerCamelCase {
+function ConvertTo-CamelCase {
     param (
         [string]$Text
     )
-
-    if ([string]::IsNullOrEmpty($Text)) {
+ 
+    if ([string]::IsNullOrEmpty($Text) -or [string]::IsNullOrWhiteSpace($Text)) {
         return $Text
     }
 
@@ -35,12 +33,8 @@ function ConvertTo-LowerCamelCase {
       }else {
            $capitalizedWords += $($Parts[$i].Substring(0,1).ToUpper() + $Parts[$i].Substring(1).ToLower());
       }
-      
    }
-  
      return [string]::Join("", $capitalizedWords);     
 }
 
-Export-ModuleMember -Function ConvertTo-LowerCamelCase
-
- 
+Export-ModuleMember -Function ConvertTo-CamelCase
