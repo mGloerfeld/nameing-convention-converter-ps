@@ -10,30 +10,47 @@ PowerShell modules to convert strings.
 # How to use
 
 **Using the PowerShell Gallery**
-The NameingConventionConverter module via PowerShell Gallery.
 
 ```PowerShell
-## Download and install as powershell module.
+## Download and install as powershell module
 $> Install-Module -Name GlobeCruising.Common.NameingConventionConverter
-OUTPUT> herosOfPowerShell
+$> Get-Module -Name GlobeCruising.Common.StringConverter
+
+OUTPUT> ModuleType  Version  PreRelease  Name                                         ExportedCommands
+        ----------  -------  ----------  ----                                         ----------------
+        Manifest    1.0.1                GlobeCruising.Common.NameingStringConverter  {Add-Content, Clear-Cont...
 ```
 
 **Use as offline module**
 
 PowerShell uses several folders in which modules are searched for. The command **`$env:PSModulePath`** lists all module folders in which modules are searched for. These paths are commonly used on a Windows system. `C:\Program Files\PowerShell\Modules`, `C:\program files\powershell\7\Modules`, `C:\Program Files\WindowsPowerShell\Modules`, `C:\Windows\system32\WindowsPowerShell\v1.0\Modules`, `C:\Users\<user>\OneDrive\Documents\PowerShell\Modules`
+Download current releases [here](https://github.com/mGloerfeld/nameing-convention-converter/releases) and exctract to your preferd folder e.g. 'C:\program files\powershell\7\Modules'.
 
 ```PowerShell
-## Download and install as powershell module.
-$> Install-Module -Name GlobeCruising.Common.StringConverter
-OUTPUT> herosOfPowerShell
+## Check if module is loaded
+$> Get-Module -Name GlobeCruising.Common.StringConverter
+
+OUTPUT> ModuleType  Version  PreRelease  Name                                         ExportedCommands
+        ----------  -------  ----------  ----                                         ----------------
+        Manifest    1.0.1                GlobeCruising.Common.NameingStringConverter  {Add-Content, Clear-Cont...
 ```
 
-**Manually**
+**Use inside scripts**
+Make sure module is downloaded and extracted to your preferd folder. Otherwise download current releases [here](https://github.com/mGloerfeld/nameing-convention-converter/releases) and exctract to your preferd folder e.g. 'D:\any-folder\my-scripts'.
 
-´Get-Module´
-´Import-Module "./string-converter.psd1" -Force´
+```PowerShell
+# yourScript.ps1
+Import-Module -Name "D:\any-folder\my-scripts\NameingConventionConverter" -Verbose
 
-´Remove-Module ps-string-converter´
+function doSomething {
+
+    $val = ConvetTo-CamelCase "Hello world from PowerShell";
+
+    # $val values is helloWorldFromPowerShell
+    return $val;
+}
+
+```
 
 # Supported conventions
 
