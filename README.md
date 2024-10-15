@@ -77,7 +77,9 @@ Camel case is the practice of writing phrases without spaces or punctuation and 
 
 ```PowerShell
 $> ConvertTo-CamelCase "Heros of PowerShell"
-OUTPUT> herosOfPowerShell
+
+# OUTPUT:
+herosOfPowerShell
 ```
 
 ## Cobol Case
@@ -86,7 +88,9 @@ The Cobol case is again a combination of upper flat case and kebab case rules. T
 
 ```PowerShell
 $> ConvertTo-CobolCase "Heros of PowerShell"
-OUTPUT> HEROS-OF-POWERSHELL
+
+# OUTPUT:
+HEROS-OF-POWERSHELL
 ```
 
 ## Flat Case
@@ -95,7 +99,9 @@ In the flat case, we name the variable by combining all the words and letters wi
 
 ```PowerShell
 $> ConvertTo-FlatCase "Heros of PowerShell"
-OUTPUT> herosofpowershell
+
+# OUTPUT:
+herosofpowershell
 ```
 
 ## Kebab Case
@@ -104,7 +110,9 @@ Kebab case is also known as Dash Case, Lisp Case, and Spinal Case. It is similar
 
 ```PowerShell
 $> ConvertTo-KebabCase "Heros of PowerShell"
-OUTPUT> heros-of-powershell
+
+# OUTPUT:
+heros-of-powershell
 ```
 
 ## Pascal Case
@@ -113,7 +121,9 @@ Also known as Upper Camel Case or Studly Case, this notation is formed with ever
 
 ```PowerShell
 $> ConvertTo-PascalCase "Heros of PowerShell"
-OUTPUT> HerosOfPowerShell
+
+# OUTPUT:
+HerosOfPowerShell
 ```
 
 ## Screaming Snake Case
@@ -122,7 +132,9 @@ The screaming snake case variable is created by using all capital letters of the
 
 ```PowerShell
 $> ConvertTo-ScreamingSnakeCase "Heros of PowerShell"
-OUTPUT> HEROS_OF_POWERSHELL
+
+# OUTPUT:
+HEROS_OF_POWERSHELL
 ```
 
 ## Snake Case
@@ -131,7 +143,9 @@ Snake case is the naming convention in which each space is replaced with an unde
 
 ```PowerShell
 $> ConvertTo-SnakeCase "Heros of PowerShell"
-OUTPUT> heros_of_powershell
+
+# OUTPUT:
+heros_of_powershell
 ```
 
 ## Train Case
@@ -140,7 +154,9 @@ The train case is also known as the HTTP header case. It is formed by capitalizi
 
 ```PowerShell
 $> ConvertTo-TrainCase "Heros of PowerShell"
-OUTPUT> Heros-Of-Powershell
+
+# OUTPUT:
+Heros-Of-Powershell
 ```
 
 ## Pascal Snake Case
@@ -149,7 +165,9 @@ The Pascal Snake Case is formed by combining the rules of pascal and snake cases
 
 ```PowerShell
 $> ConvertTo-PascalSnakeCase "Heros of PowerShell"
-OUTPUT> Heros_Of_PowerShell
+
+# OUTPUT:
+Heros_Of_PowerShell
 ```
 
 ## Camel Snake Case
@@ -158,7 +176,9 @@ Similar to Pascal Snake Case, this convention is formed by combining the Camel a
 
 ```PowerShell
 $> ConvertTo-CamelSnakeCase "Heros of PowerShell"
-OUTPUT> heros_Of_PowerShell
+
+# OUTPUT:
+heros_Of_PowerShell
 ```
 
 ## Upper Flat Case
@@ -167,5 +187,7 @@ This notation is formed by combining all the words and letters without any space
 
 ```PowerShell
 $> ConvertTo-UpperFlatCase "Heros of PowerShell"
-OUTPUT> HEROSOFPOWERSHELL
+
+# OUTPUT:
+HEROSOFPOWERSHELL
 ```
