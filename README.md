@@ -36,86 +36,97 @@ Below is an overview of the naming conventions used in programming languages. Ou
 
 Camel case is the practice of writing phrases without spaces or punctuation and with capitalized words. The format indicates the first word starting with either case, then the following words having an initial uppercase letter.
 
-```
-Eg: firstName, lastName
+```PowerShell
+$> ConvertTo-CamelCase "Heros of PowerShell"
+OUTPUT> herosOfPowerShell
 ```
 
 ## Cobol Case
 
 The Cobol case is again a combination of upper flat case and kebab case rules. The variable is named by capitalizing all the words separated by a hyphen. As the name implies, this convention is majorly used in the COBOL programming language.
 
-```
-Eg: END-CALL
+```PowerShell
+$> ConvertTo-CobolCase "Heros of PowerShell"
+OUTPUT> HEROS-OF-POWERSHELL
 ```
 
 ## Flat Case
 
 In the flat case, we name the variable by combining all the words and letters without leaving any space in between. All the characters in the flat case are in lowercase. This convention is very less often used as it affects readability especially when multiple words are combined.
 
-```
-Eg: firstname, Lastname
+```PowerShell
+$> ConvertTo-FlatCase "Heros of PowerShell"
+OUTPUT> herosofpowershell
 ```
 
 ## Kebab Case
 
 Kebab case is also known as Dash Case, Lisp Case, and Spinal Case. It is similar to the snake case but instead of an underscore we use a hyphen over here “-”. We mostly use this naming convention to name our custom HTML elements.
 
-```
-Eg: <navigation-drawer>
+```PowerShell
+$> ConvertTo-KebabCase "Heros of PowerShell"
+OUTPUT> heros-of-powershell
 ```
 
 ## Pascal Case
 
 Also known as Upper Camel Case or Studly Case, this notation is formed with every first letter of a word with a capital letter. In the case of names with multiple words, all words will start with capital letters. This naming convention is mostly used to name Classes in the programming languages like C#, JavaScript, Java, and Python.
 
-```
-Eg: FirstName, LastName
+```PowerShell
+$> ConvertTo-PascalCase "Heros of PowerShell"
+OUTPUT> HerosOfPowerShell
 ```
 
 ## Screaming Snake Case
 
 The screaming snake case variable is created by using all capital letters of the words separated by an underscore. It is also known as a Macro or Constant Case. Most programming languages use this format to declare constant variables.
 
-```
-Eg: MAX_AGE, MIN_AGE
+```PowerShell
+$> ConvertTo-ScreamingSnakeCase "Heros of PowerShell"
+OUTPUT> HEROS_OF_POWERSHELL
 ```
 
 ## Snake Case
 
 Snake case is the naming convention in which each space is replaced with an underscore (\_) character, and words are written in lowercase. It is a commonly used naming convention in computing, for example for variable and subroutine names, and for filenames.
 
-```
-Eg: first_name, last_name
+```PowerShell
+$> ConvertTo-SnakeCase "Heros of PowerShell"
+OUTPUT> heros_of_powershell
 ```
 
 ## Train Case
 
 The train case is also known as the HTTP header case. It is formed by capitalizing the words’ first letter and separating them with a hyphen. You will mostly see this convention is used in HTTP header requests and responses.
 
-```
-Eg: Content-Type, Content-Length
+```PowerShell
+$> ConvertTo-TrainCase "Heros of PowerShell"
+OUTPUT> Heros-Of-Powershell
 ```
 
 ## Pascal Snake Case
 
 The Pascal Snake Case is formed by combining the rules of pascal and snake cases. It is formed by capitalizing the first letter of each word and separating these words with the underscore “\_”. This convention is observed in legacy Java packages.
 
-```
-Eg: First_Name, Last_Name
+```PowerShell
+$> ConvertTo-PascalSnakeCase "Heros of PowerShell"
+OUTPUT> Heros_Of_PowerShell
 ```
 
 ## Camel Snake Case
 
 Similar to Pascal Snake Case, this convention is formed by combining the Camel and Snake Case rules. Over here, the variable name starts in lowercase and is separated by an underscore “\_”.
 
-```
-Eg: is_Valid_Customer
+```PowerShell
+$> ConvertTo-CamelSnakeCase "Heros of PowerShell"
+OUTPUT> heros_Of_PowerShell
 ```
 
 ## Upper Flat Case
 
 This notation is formed by combining all the words and letters without any space in between with all the letters in upper case. Similar to the flat case this convention is hardly used as it affects readability when multiple words are involved.
 
-```
-Eg: FIRSTNAME, LASTNAME
+```PowerShell
+$> ConvertTo-UpperFlatCase "Heros of PowerShell"
+OUTPUT> HEROSOFPOWERSHELL
 ```
