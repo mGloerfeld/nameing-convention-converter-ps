@@ -4,10 +4,31 @@ PowerShell modules to convert strings.
 
 > [!NOTE]
 > This module is not signed. It is therefore important that the
-> ExecutionPolicy is correctly set to “unrestricted”.
+> **ExecutionPolicy** is correctly set to **unrestricted**.
 > Further details can be found [here](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.4).
 
 # How to use
+
+**Using the PowerShell Gallery**
+The NameingConventionConverter module via PowerShell Gallery.
+
+```PowerShell
+## Download and install as powershell module.
+$> Install-Module -Name GlobeCruising.Common.NameingConventionConverter
+OUTPUT> herosOfPowerShell
+```
+
+**Use as offline module**
+
+PowerShell uses several folders in which modules are searched for. The command **`$env:PSModulePath`** lists all module folders in which modules are searched for. These paths are commonly used on a Windows system. `C:\Program Files\PowerShell\Modules`, `C:\program files\powershell\7\Modules`, `C:\Program Files\WindowsPowerShell\Modules`, `C:\Windows\system32\WindowsPowerShell\v1.0\Modules`, `C:\Users\<user>\OneDrive\Documents\PowerShell\Modules`
+
+```PowerShell
+## Download and install as powershell module.
+$> Install-Module -Name GlobeCruising.Common.StringConverter
+OUTPUT> herosOfPowerShell
+```
+
+**Manually**
 
 ´Get-Module´
 ´Import-Module "./string-converter.psd1" -Force´
