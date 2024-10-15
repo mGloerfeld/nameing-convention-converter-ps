@@ -9,7 +9,7 @@ PowerShell modules to convert strings.
 
 # How to use
 
-**Using the PowerShell Gallery**
+## Using the PowerShell Gallery
 
 ```PowerShell
 ## Download and install as powershell module
@@ -21,7 +21,7 @@ OUTPUT> ModuleType  Version  PreRelease  Name                                   
         Manifest    1.0.1                GlobeCruising.Common.NameingStringConverter  {Add-Content, Clear-Cont...
 ```
 
-**Use as offline module**
+## Use as offline module
 
 PowerShell uses several folders in which modules are searched for. The command **`$env:PSModulePath`** lists all module folders in which modules are searched for. These paths are commonly used on a Windows system. `C:\Program Files\PowerShell\Modules`, `C:\program files\powershell\7\Modules`, `C:\Program Files\WindowsPowerShell\Modules`, `C:\Windows\system32\WindowsPowerShell\v1.0\Modules`, `C:\Users\<user>\OneDrive\Documents\PowerShell\Modules`
 Download current releases [here](https://github.com/mGloerfeld/nameing-convention-converter/releases) and exctract to your preferd folder e.g. 'C:\program files\powershell\7\Modules'.
@@ -35,7 +35,8 @@ OUTPUT> ModuleType  Version  PreRelease  Name                                   
         Manifest    1.0.1                GlobeCruising.Common.NameingStringConverter  {Add-Content, Clear-Cont...
 ```
 
-**Use inside scripts**
+## Use inside scripts
+
 Make sure module is downloaded and extracted to your preferd folder. Otherwise download current releases [here](https://github.com/mGloerfeld/nameing-convention-converter/releases) and exctract to your preferd folder e.g. 'D:\any-folder\my-scripts'.
 
 ```PowerShell
