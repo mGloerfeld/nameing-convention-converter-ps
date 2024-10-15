@@ -12,13 +12,14 @@ PowerShell modules to convert strings.
 ## Using the PowerShell Gallery
 
 ```PowerShell
-## Download and install as powershell module
+# Download and install as powershell module
 $> Install-Module -Name GlobeCruising.Common.NameingConventionConverter
 $> Get-Module -Name GlobeCruising.Common.StringConverter
 
-OUTPUT> ModuleType  Version  PreRelease  Name                                         ExportedCommands
-        ----------  -------  ----------  ----                                         ----------------
-        Manifest    1.0.1                GlobeCruising.Common.NameingStringConverter  {Add-Content, Clear-Cont...
+# OUTPUT:
+ModuleType  Version  PreRelease  Name                                         ExportedCommands
+----------  -------  ----------  ----                                         ----------------
+Manifest    1.0.1                GlobeCruising.Common.NameingStringConverter  {Add-Content, Clear-Cont...
 ```
 
 ## Use as offline module
@@ -27,12 +28,13 @@ PowerShell uses several folders in which modules are searched for. The command *
 Download current releases [here](https://github.com/mGloerfeld/nameing-convention-converter/releases) and exctract to your preferd folder e.g. 'C:\program files\powershell\7\Modules'.
 
 ```PowerShell
-## Check if module is loaded
+# Check if module is loaded
 $> Get-Module -Name GlobeCruising.Common.StringConverter
 
-OUTPUT> ModuleType  Version  PreRelease  Name                                         ExportedCommands
-        ----------  -------  ----------  ----                                         ----------------
-        Manifest    1.0.1                GlobeCruising.Common.NameingStringConverter  {Add-Content, Clear-Cont...
+# OUTPUT:
+ModuleType  Version  PreRelease  Name                                         ExportedCommands
+----------  -------  ----------  ----                                         ----------------
+Manifest    1.0.1                GlobeCruising.Common.NameingStringConverter  {Add-Content,Clear-Cont...
 ```
 
 ## Use inside scripts
