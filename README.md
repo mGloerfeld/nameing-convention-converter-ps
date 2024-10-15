@@ -62,7 +62,7 @@ Below is an overview of the naming conventions used in programming languages. Ou
 |              Nameing Convention               |    Example Format    |
 | :-------------------------------------------: | :------------------: |
 |           [Camel Case](#camel-case)           |      camelCase       |
-|           [Cobol Case](#Cobol-case)           |      COBOL-CASE      |
+|           [Cobol Case](#cobol-case)           |      COBOL-CASE      |
 |           [Train Case](#train-case)           |      Train-Case      |
 |          [Pascal Case](#pascal-case)          |      PascalCase      |
 |           [Kebab Case](#kebab-case)           |      kebab-case      |
