@@ -1,3 +1,5 @@
+. ".\utils\cleanup-string.ps1"
+
 <#
 .Synopsis
    Converts text into CamelCase. 
@@ -14,46 +16,41 @@
 #>
 function ConvertTo-CamelCase {
     
-   Param
+   param
    (
-      [parameter(Mandatory=$true)]
-      [string]
+      [parameter(Mandatory=$true, Position=0)]
       [ValidateNotNull()]
-      $value
+      [string] $value
    )
-
-   Write-Host $value.GetType()
-
-
-   switch ($value.GetType())                         
-   {                        
-           
-       [int]    { return $value }                     
-       { $_ -eq [string]  } { return ($value) }                        
-       Default  { throw "Can't convert input: {0}" -f $value }                       
-   }  
+ 
+   return  StringTo-Array $value | ToCamelCase
 }
 
-function ToCamelCase([string]$value) {
+function ToCamelCase() {
     
-     if ($value -eq "") {
-          return $Text
-     }
+ param
+   (
+      [Parameter(Mandatory=$true, Position=0, ValueFromPipeline = $true)]
+      [ValidateNotNull()]
+      [String[]] $value 
+   )
  
-    # Remove all leading, colseing and multiple whitespaces in text. 
-    $Text = $Text -replace '(\s+)',' '
-    $Parts = $Text.Trim().Split(" ");
-    $capitalizedWords="";
+ BEGIN {
+  $str = "";
+ }
 
-    For ($i=0; $i -lt  $Parts.Count; $i++) {
-     
-      if($i -eq 0){
-          $capitalizedWords += $($Parts[$i].Substring(0,1).ToLower() +  $Parts[$i].Substring(1).ToLower());
-      }else {
-           $capitalizedWords += $($Parts[$i].Substring(0,1).ToUpper() + $Parts[$i].Substring(1).ToLower());
-      }
+ PROCESS {
+       
+   if($str -eq ""){
+      $str += $($value.Substring(0,1).ToLower() +  $value.Substring(1).ToLower())
+   }else {
+       $str += $($value.Substring(0,1).ToUpper() + $value.Substring(1).ToLower())
    }
-     return [string]::Join("", $capitalizedWords);  
+ }
+
+  END {
+   return $str
+   }
 }
 
  Export-ModuleMember -Function ConvertTo-CamelCase
