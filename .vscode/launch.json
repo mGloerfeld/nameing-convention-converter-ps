@@ -2,6 +2,16 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Run Pester tests",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "Invoke-Pester",
+            "args": [
+                "-Path ${cwd}\\tests"
+            ],
+            "cwd": "${cwd}"
+        },
+        {
             "type": "PowerShell",
             "request": "launch",
             "name": "PowerShell Launch (current file)",
@@ -17,7 +27,7 @@
         {
             "type": "PowerShell",
             "request": "launch",
-            "name": "PowerShell Interactive Session",
+            "name": "Test PowerShell",
             "cwd": "${workspaceRoot}"
         }
     ]

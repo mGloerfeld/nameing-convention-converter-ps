@@ -1,5 +1,5 @@
 Install-Module -Name Pester -Force -SkipPublisherCheck
-Import-Module "../src/lib/pascal-case.psm1" -Force
+Import-Module "../src/lib/train-case.psm1" -Force
   
 BeforeAll { 
 }

@@ -13,14 +13,33 @@
    Removes all leading, closing and double whitespaces.
 #>
 function ConvertTo-CamelCase {
-    param (
-        [string]$Text
-    )
- 
-    if ([string]::IsNullOrEmpty($Text) -or [string]::IsNullOrWhiteSpace($Text)) {
-        return $Text
-    }
+    
+   Param
+   (
+      [parameter(Mandatory=$true)]
+      [string]
+      [ValidateNotNull()]
+      $value
+   )
 
+   Write-Host $value.GetType()
+
+
+   switch ($value.GetType())                         
+   {                        
+           
+       [int]    { return $value }                     
+       { $_ -eq [string]  } { return ($value) }                        
+       Default  { throw "Can't convert input: {0}" -f $value }                       
+   }  
+}
+
+function ToCamelCase([string]$value) {
+    
+     if ($value -eq "") {
+          return $Text
+     }
+ 
     # Remove all leading, colseing and multiple whitespaces in text. 
     $Text = $Text -replace '(\s+)',' '
     $Parts = $Text.Trim().Split(" ");
@@ -34,7 +53,7 @@ function ConvertTo-CamelCase {
            $capitalizedWords += $($Parts[$i].Substring(0,1).ToUpper() + $Parts[$i].Substring(1).ToLower());
       }
    }
-     return [string]::Join("", $capitalizedWords);     
+     return [string]::Join("", $capitalizedWords);  
 }
 
-Export-ModuleMember -Function ConvertTo-CamelCase
+ Export-ModuleMember -Function ConvertTo-CamelCase
