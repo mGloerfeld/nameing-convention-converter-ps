@@ -1,3 +1,6 @@
+. $PSScriptRoot"\utils\string-to-array.ps1"
+. $PSScriptRoot"\utils\to-upper-flat-case.ps1"
+
 <#
 .Synopsis
    Converts text into UpperFlatCase. 
@@ -13,19 +16,15 @@
    Removes all leading, closing and double whitespaces.
 #>
 function ConvetTo-UpperFlatCase {
-    param (
-        [string]$Text
-    )
 
-    if ([string]::IsNullOrEmpty($Text) -or [string]::IsNullOrWhiteSpace($Text)) {
-        return $Text
-    }
-
-    # Remove all leading, colseing and multiple whitespaces in text. 
-    $Text = $Text -replace '(\s+)',' '
-    $Parts = $Text.Trim().ToLower().Split(" ");
-
-    return [string]::Join("-", $Parts);      
+      param
+   (
+      [parameter(Mandatory=$true, Position=0)]
+      [ValidateNotNull()]
+      [string] $value
+   )
+  
+     return  StringTo-Array $value | ToUpperFlatCase
 }
 
 Export-ModuleMember -Function ConvetTo-UpperFlatCase

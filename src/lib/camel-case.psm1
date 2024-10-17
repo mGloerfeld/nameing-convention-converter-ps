@@ -1,4 +1,5 @@
-. ".\utils\cleanup-string.ps1"
+. $PSScriptRoot"\utils\string-to-array.ps1"
+. $PSScriptRoot"\utils\to-camel-case.ps1"
 
 <#
 .Synopsis
@@ -14,6 +15,7 @@
 .NOTES
    Removes all leading, closing and double whitespaces.
 #>
+
 function ConvertTo-CamelCase {
     
    param
@@ -22,35 +24,8 @@ function ConvertTo-CamelCase {
       [ValidateNotNull()]
       [string] $value
    )
- 
-   return  StringTo-Array $value | ToCamelCase
-}
 
-function ToCamelCase() {
-    
- param
-   (
-      [Parameter(Mandatory=$true, Position=0, ValueFromPipeline = $true)]
-      [ValidateNotNull()]
-      [String[]] $value 
-   )
- 
- BEGIN {
-  $str = "";
- }
-
- PROCESS {
-       
-   if($str -eq ""){
-      $str += $($value.Substring(0,1).ToLower() +  $value.Substring(1).ToLower())
-   }else {
-       $str += $($value.Substring(0,1).ToUpper() + $value.Substring(1).ToLower())
+      return  StringTo-Array $value | ToCamelCase   
    }
- }
-
-  END {
-   return $str
-   }
-}
-
+ 
  Export-ModuleMember -Function ConvertTo-CamelCase

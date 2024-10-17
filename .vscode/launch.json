@@ -7,7 +7,7 @@
             "request": "launch",
             "script": "Invoke-Pester",
             "args": [
-                "-Path ${cwd}\\tests"
+                "-Path ${cwd}\\test"
             ],
             "cwd": "${cwd}"
         },
