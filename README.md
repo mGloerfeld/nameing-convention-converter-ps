@@ -1,59 +1,25 @@
 # Nameing Convention Converter
 
-PowerShell modules to convert strings.
+TextCaseConverter is a versatile tool designed to convert text strings into various naming conventions. Whether you’re working on a coding project, writing documentation, or organizing data, TextCaseConverter simplifies the process of transforming text into the desired format.
+
+# Features
+
+- **Multiple Naming Conventions:** Supports a wide range of naming conventions including camelCase, snake_case, PascalCase, kebab-case, and more.
+- **Batch Conversion:** Convert multiple text strings at once to save time and effort.
+- **Customizable Options:** Fine-tune the conversion process with customizable settings to meet your specific needs.
+- **User-Friendly Interface:** Intuitive and easy-to-use interface for seamless text conversion.
+- **Open Source:** Completely open-source and available for contributions from the community.
+
+# Usage
+
+- **Input Text:** Enter the text string you want to convert.
+- **Select Convention:** Choose the desired naming convention from the available options.
+- **Convert:** Click the convert button to transform your text.
 
 > [!NOTE]
 > This module is not signed. It is therefore important that the
 > **ExecutionPolicy** is correctly set to **unrestricted**.
 > Further details can be found [here](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.4).
-
-# How to use
-
-## Using the PowerShell Gallery
-
-```PowerShell
-# Download and install as powershell module
-$> Install-Module -Name GlobeCruising.Common.NameingConventionConverter
-$> Get-Module -Name GlobeCruising.Common.StringConverter
-
-# OUTPUT:
-ModuleType  Version  PreRelease  Name                                         ExportedCommands
-----------  -------  ----------  ----                                         ----------------
-Manifest    1.0.1                GlobeCruising.Common.NameingStringConverter  {Add-Content, Clear-Cont...
-```
-
-## Use as offline module
-
-PowerShell uses several folders in which modules are searched for. The command **`$env:PSModulePath`** lists all module folders in which modules are searched for. These paths are commonly used on a Windows system. `C:\Program Files\PowerShell\Modules`, `C:\program files\powershell\7\Modules`, `C:\Program Files\WindowsPowerShell\Modules`, `C:\Windows\system32\WindowsPowerShell\v1.0\Modules`, `C:\Users\<user>\OneDrive\Documents\PowerShell\Modules`
-Download current releases [here](https://github.com/mGloerfeld/nameing-convention-converter/releases) and exctract to your preferd folder e.g. 'C:\program files\powershell\7\Modules'.
-
-```PowerShell
-# Check if module is loaded
-$> Get-Module -Name GlobeCruising.Common.StringConverter
-
-# OUTPUT:
-ModuleType  Version  PreRelease  Name                                         ExportedCommands
-----------  -------  ----------  ----                                         ----------------
-Manifest    1.0.1                GlobeCruising.Common.NameingStringConverter  {Add-Content,Clear-Cont...
-```
-
-## Use inside scripts
-
-Make sure module is downloaded and extracted to your preferd folder. Otherwise download current releases [here](https://github.com/mGloerfeld/nameing-convention-converter/releases) and exctract to your preferd folder e.g. 'D:\any-folder\my-scripts'.
-
-```PowerShell
-# yourScript.ps1
-Import-Module -Name "D:\any-folder\my-scripts\NameingConventionConverter" -Verbose
-
-function doSomething {
-
-    $val = ConvetTo-CamelCase "Hello world from PowerShell";
-
-    # $val values is helloWorldFromPowerShell
-    return $val;
-}
-
-```
 
 # Supported conventions
 
@@ -193,3 +159,57 @@ $> ConvertTo-UpperFlatCase "Heros of PowerShell"
 # OUTPUT:
 HEROSOFPOWERSHELL
 ```
+
+## Installation
+
+```PowerShell
+# Download and install as powershell module
+$> Install-Module -Name GlobeCruising.Common.NameingConventionConverter
+$> Get-Module -Name GlobeCruising.Common.StringConverter
+
+# OUTPUT:
+ModuleType  Version  PreRelease  Name                                         ExportedCommands
+----------  -------  ----------  ----                                         ----------------
+Manifest    1.0.1                GlobeCruising.Common.NameingStringConverter  {Add-Content, Clear-Cont...
+```
+
+### Use as offline module
+
+PowerShell uses several folders in which modules are searched for. The command **`$env:PSModulePath`** lists all module folders in which modules are searched for. These paths are commonly used on a Windows system. `C:\Program Files\PowerShell\Modules`, `C:\program files\powershell\7\Modules`, `C:\Program Files\WindowsPowerShell\Modules`, `C:\Windows\system32\WindowsPowerShell\v1.0\Modules`, `C:\Users\<user>\OneDrive\Documents\PowerShell\Modules`
+Download current releases [here](https://github.com/mGloerfeld/nameing-convention-converter/releases) and exctract to your preferd folder e.g. 'C:\program files\powershell\7\Modules'.
+
+```PowerShell
+# Check if module is loaded
+$> Get-Module -Name GlobeCruising.Common.StringConverter
+
+# OUTPUT:
+ModuleType  Version  PreRelease  Name                                         ExportedCommands
+----------  -------  ----------  ----                                         ----------------
+Manifest    1.0.1                GlobeCruising.Common.NameingStringConverter  {Add-Content,Clear-Cont...
+```
+
+### Use inside scripts
+
+Make sure module is downloaded and extracted to your preferd folder. Otherwise download current releases [here](https://github.com/mGloerfeld/nameing-convention-converter/releases) and exctract to your preferd folder e.g. 'D:\any-folder\my-scripts'.
+
+```PowerShell
+# yourScript.ps1
+Import-Module -Name "D:\any-folder\my-scripts\NameingConventionConverter" -Verbose
+
+function doSomething {
+
+    $val = ConvetTo-CamelCase "Hello world from PowerShell";
+
+    # $val values is helloWorldFromPowerShell
+    return $val;
+}
+
+```
+
+# Contributing
+
+We welcome contributions! Please read our contributing guidelines to get started.
+
+# License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
