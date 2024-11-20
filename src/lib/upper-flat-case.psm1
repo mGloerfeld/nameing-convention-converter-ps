@@ -15,7 +15,7 @@
 .NOTES
    Removes all leading, closing and double whitespaces.
 #>
-function ConvetTo-UpperFlatCase {
+function ConvertTo-UpperFlatCase {
 
       param
    (

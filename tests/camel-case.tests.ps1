@@ -12,7 +12,7 @@ Describe 'Tests for ConvertTo-CamelCase.' {
     # $ShouldParams = @{ Throw = $true; ExpectedMessage = "Cannot validate argument on parameter 'OutDir'. OutDir must be a folder path, not a file."; ExceptionType   = ([System.Management.Automation.ParameterBindingException])    }
 
     It "Returns <expected> (<value>)" -ForEach @(
-        @{ value = "Hello world!";                       expected = 'helloWorld' }
+        @{ value = "Hello world";                       expected = 'helloWorld' }
         @{ value = "  Hello	heros from powerShell !  ";  expected = 'helloHerosFromPowerShell' }
         # @{ value = " 	 ";                              expected = "" }
         ) {

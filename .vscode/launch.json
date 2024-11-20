@@ -1,5 +1,5 @@
 {
-    "version": "0.2.0",
+    "version": "1.0.1",
     "configurations": [
         {
             "name": "Run Pester tests",
@@ -12,23 +12,9 @@
             "cwd": "${cwd}"
         },
         {
-            "type": "PowerShell",
-            "request": "launch",
-            "name": "PowerShell Launch (current file)",
-            "script": "${file}",
-            "args": [],
-            "cwd": "${file}"
-        },
-        {
             "name": "PowerShell Attach to Host Process",
             "type": "PowerShell",
             "request": "attach"
-        },
-        {
-            "type": "PowerShell",
-            "request": "launch",
-            "name": "Test PowerShell",
-            "cwd": "${workspaceRoot}"
         }
     ]
 }
