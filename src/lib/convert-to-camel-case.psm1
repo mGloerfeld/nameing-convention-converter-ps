@@ -36,27 +36,27 @@
    - Subsequent words have their first letter capitalized
 #>
 function ConvertTo-CamelCase {
-    [CmdletBinding()]
-    param(
-        [Parameter(
-            Mandatory = $true,
-            Position = 0,
-            ValueFromPipeline = $true,
-            HelpMessage = "The string to convert to camelCase"
-        )]
-        [ValidateNotNullOrEmpty()]
-        [string]$Value
-    )
+   [CmdletBinding()]
+   param(
+      [Parameter(
+         Mandatory = $true,
+         Position = 0,
+         ValueFromPipeline = $true,
+         HelpMessage = "The string to convert to camelCase"
+      )]
+      [ValidateNotNullOrEmpty()]
+      [string]$Value
+   )
 
-    process {
-        try {
-            return StringTo-Array $Value | ToCamelCase
-        }
-        catch {
-            Write-Error "Failed to convert '$Value' to camelCase: $($_.Exception.Message)"
-            return $null
-        }
-    }
+   process {
+      try {
+         return StringTo-Array $Value | ToCamelCase
+      }
+      catch {
+         Write-Error "Failed to convert '$Value' to camelCase: $($_.Exception.Message)"
+         return $null
+      }
+   }
 }
 
 Export-ModuleMember -Function ConvertTo-CamelCase

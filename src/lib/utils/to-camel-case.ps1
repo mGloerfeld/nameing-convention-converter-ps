@@ -43,7 +43,7 @@
 #>
 function ToCamelCase {
     [CmdletBinding()] param(
-        [Parameter(Mandatory, Position=0, ValueFromPipeline)]
+        [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
         [ValidateNotNullOrEmpty()]
         [string[]] $Value,
 
@@ -83,8 +83,8 @@ function ToCamelCase {
                     [void]$builder.Append($segment.ToUpper($culture))
                 }
                 else {
-                    $first = $segment.Substring(0,1).ToUpper($culture)
-                    $rest  = $segment.Substring(1).ToLower($culture)
+                    $first = $segment.Substring(0, 1).ToUpper($culture)
+                    $rest = $segment.Substring(1).ToLower($culture)
                     [void]$builder.Append($first + $rest)
                 }
             }

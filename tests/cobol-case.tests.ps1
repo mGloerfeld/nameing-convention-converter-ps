@@ -1,19 +1,19 @@
 
 BeforeAll { 
     # Get correct file name 
-    $file = $(Split-Path $PSCommandPath -leaf).Replace('.tests.ps1','.psm1')
+    $file = $(Split-Path $PSCommandPath -leaf).Replace('.tests.ps1', '.psm1')
  
     # Import buisness module 
-    Import-Module  $(Join-Path -Path $(Get-Location) -ChildPath $("/src/lib/" +  $file ))
+    Import-Module  $(Join-Path -Path $(Get-Location) -ChildPath $("/src/lib/" + $file ))
 }
 
 Describe 'ConvertTo-CobolCase' {
     Context 'Basic conversions' {
         It 'Returns <expected> (<value>)' -ForEach @(
-            @{ value = 'Hello world!';                       expected = 'HELLO-WORLD' }
+            @{ value = 'Hello world!'; expected = 'HELLO-WORLD' }
             @{ value = "  Hello	heros from powerShell !  "; expected = 'HELLO-HEROS-FROM-POWERSHELL' }
-            @{ value = 'Multiple   space   segments';       expected = 'MULTIPLE-SPACE-SEGMENTS' }
-            @{ value = 'SINGLE';                            expected = 'SINGLE' }
+            @{ value = 'Multiple   space   segments'; expected = 'MULTIPLE-SPACE-SEGMENTS' }
+            @{ value = 'SINGLE'; expected = 'SINGLE' }
         ) {
             ConvertTo-CobolCase -Value $value | Should -Be $expected
         }

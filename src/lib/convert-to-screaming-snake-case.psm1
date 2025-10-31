@@ -18,15 +18,15 @@
    Returns empty string if no segments found.
 #>
 function ConvertTo-ScreamingSnakeCase {
-    [CmdletBinding()] param(
-        [Parameter(Mandatory, Position=0, ValueFromPipeline)]
-        [ValidateNotNullOrEmpty()]
-        [string] $Value
-    )
-    process {
-        try { StringTo-Array $Value -AsValues | ToScreamingSnakeCase }
-        catch { Write-Error "Failed to convert '$Value' to SCREAMING_SNAKE_CASE: $($_.Exception.Message)"; return $null }
-    }
+   [CmdletBinding()] param(
+      [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
+      [ValidateNotNullOrEmpty()]
+      [string] $Value
+   )
+   process {
+      try { StringTo-Array $Value -AsValues | ToScreamingSnakeCase }
+      catch { Write-Error "Failed to convert '$Value' to SCREAMING_SNAKE_CASE: $($_.Exception.Message)"; return $null }
+   }
 }
 
 Export-ModuleMember -Function ConvertTo-ScreamingSnakeCase

@@ -34,27 +34,27 @@
    Empty or whitespace-only words are skipped.
 #>
 function ToPascalCase {
-    [CmdletBinding()]
-    [OutputType([string])]
-    param(
-        [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
-        [ValidateNotNullOrEmpty()]
-        [string[]]$Value,
-        [Parameter()] [switch] $Invariant,
-        [Parameter()] [switch] $PreserveAcronyms
-    )
-    begin {
-        $builder = New-Object System.Text.StringBuilder
-        $culture = if ($Invariant) { [System.Globalization.CultureInfo]::InvariantCulture } else { [System.Globalization.CultureInfo]::CurrentCulture }
-    }
-    process {
-        foreach ($word in $Value) {
-            if ([string]::IsNullOrWhiteSpace($word)) { continue }
-            if ($PreserveAcronyms -and $word -match '^[A-Z0-9]{2,}$') { [void]$builder.Append($word); continue }
-            if ($word.Length -eq 1) { [void]$builder.Append($word.ToUpper($culture)); continue }
-            $segment = $word.Substring(0,1).ToUpper($culture) + $word.Substring(1).ToLower($culture)
-            [void]$builder.Append($segment)
-        }
-    }
-    end { $builder.ToString() }
+   [CmdletBinding()]
+   [OutputType([string])]
+   param(
+      [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
+      [ValidateNotNullOrEmpty()]
+      [string[]]$Value,
+      [Parameter()] [switch] $Invariant,
+      [Parameter()] [switch] $PreserveAcronyms
+   )
+   begin {
+      $builder = New-Object System.Text.StringBuilder
+      $culture = if ($Invariant) { [System.Globalization.CultureInfo]::InvariantCulture } else { [System.Globalization.CultureInfo]::CurrentCulture }
+   }
+   process {
+      foreach ($word in $Value) {
+         if ([string]::IsNullOrWhiteSpace($word)) { continue }
+         if ($PreserveAcronyms -and $word -match '^[A-Z0-9]{2,}$') { [void]$builder.Append($word); continue }
+         if ($word.Length -eq 1) { [void]$builder.Append($word.ToUpper($culture)); continue }
+         $segment = $word.Substring(0, 1).ToUpper($culture) + $word.Substring(1).ToLower($culture)
+         [void]$builder.Append($segment)
+      }
+   }
+   end { $builder.ToString() }
 }

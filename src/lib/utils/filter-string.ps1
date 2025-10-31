@@ -35,9 +35,9 @@
 function filter-string {
     [CmdletBinding()]
     [OutputType([string])]
-    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseApprovedVerbs", "", Justification="Benutzeranforderung: spezifischer Funktionsname 'filter-string'")]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseApprovedVerbs", "", Justification = "Benutzeranforderung: spezifischer Funktionsname 'filter-string'")]
     param(
-        [Parameter(Mandatory, Position=0, ValueFromPipeline, HelpMessage='Zu filternder String')]
+        [Parameter(Mandatory, Position = 0, ValueFromPipeline, HelpMessage = 'Zu filternder String')]
         [ValidateNotNullOrEmpty()]
         [string] $Value,
 
@@ -45,9 +45,9 @@ function filter-string {
     )
 
     begin {
-    # Regex: Erlaube Buchstaben/Ziffern, Bindestrich oder ein Space, alles andere entfernen (Unterstrich wird später konvertiert).
-    # Vorgehen: Erst nicht erlaubte Whitespaces/Sonderzeichen durch '' ersetzen, dann optional Spaces kollabieren und '_' -> '-'.
-    $allowedPattern = '[^\p{L}\p{N}_ -]'
+        # Regex: Erlaube Buchstaben/Ziffern, Bindestrich oder ein Space, alles andere entfernen (Unterstrich wird später konvertiert).
+        # Vorgehen: Erst nicht erlaubte Whitespaces/Sonderzeichen durch '' ersetzen, dann optional Spaces kollabieren und '_' -> '-'.
+        $allowedPattern = '[^\p{L}\p{N}_ -]'
         $multiSpacePattern = ' {2,}'
     }
 

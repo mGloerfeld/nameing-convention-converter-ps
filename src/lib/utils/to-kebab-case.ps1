@@ -33,25 +33,25 @@
    Empty or whitespace-only words are skipped.
 #>
 function ToKebabCase {
-    [CmdletBinding()]
-    [OutputType([string])]
-    param(
-        [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
-        [ValidateNotNullOrEmpty()]
-        [string[]]$Value,
-        [Parameter()] [switch] $Invariant
-    )
-    begin {
-        $builder = New-Object System.Text.StringBuilder
-        $first = $true
-        $culture = if ($Invariant) { [System.Globalization.CultureInfo]::InvariantCulture } else { [System.Globalization.CultureInfo]::CurrentCulture }
-    }
-    process {
-        foreach ($word in $Value) {
-            if ([string]::IsNullOrWhiteSpace($word)) { continue }
-            $lower = $word.ToLower($culture)
-            if ($first) { [void]$builder.Append($lower); $first = $false } else { [void]$builder.Append('-').Append($lower) }
-        }
-    }
-    end { $builder.ToString() }
+   [CmdletBinding()]
+   [OutputType([string])]
+   param(
+      [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
+      [ValidateNotNullOrEmpty()]
+      [string[]]$Value,
+      [Parameter()] [switch] $Invariant
+   )
+   begin {
+      $builder = New-Object System.Text.StringBuilder
+      $first = $true
+      $culture = if ($Invariant) { [System.Globalization.CultureInfo]::InvariantCulture } else { [System.Globalization.CultureInfo]::CurrentCulture }
+   }
+   process {
+      foreach ($word in $Value) {
+         if ([string]::IsNullOrWhiteSpace($word)) { continue }
+         $lower = $word.ToLower($culture)
+         if ($first) { [void]$builder.Append($lower); $first = $false } else { [void]$builder.Append('-').Append($lower) }
+      }
+   }
+   end { $builder.ToString() }
 }

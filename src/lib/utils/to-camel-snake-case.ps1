@@ -49,8 +49,9 @@ function ToCamelSnakeCase {
             else {
                 if ($word.Length -eq 1) {
                     [void]$builder.Append('_').Append($word.ToUpper($culture))
-                } else {
-                    $cap = $word.Substring(0,1).ToUpper($culture) + $word.Substring(1).ToLower($culture)
+                }
+                else {
+                    $cap = $word.Substring(0, 1).ToUpper($culture) + $word.Substring(1).ToLower($culture)
                     [void]$builder.Append('_').Append($cap)
                 }
             }

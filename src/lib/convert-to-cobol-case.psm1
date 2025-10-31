@@ -21,15 +21,15 @@
    Returns empty string if no segments found.
 #>
 function ConvertTo-CobolCase {
-    [CmdletBinding()] param(
-        [Parameter(Mandatory, Position=0, ValueFromPipeline)]
-        [ValidateNotNullOrEmpty()]
-        [string] $Value
-    )
-    process {
-        try { StringTo-Array $Value -AsValues | ToCobolCase }
-        catch { Write-Error "Failed to convert '$Value' to COBOL-CASE: $($_.Exception.Message)"; return $null }
-    }
+   [CmdletBinding()] param(
+      [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
+      [ValidateNotNullOrEmpty()]
+      [string] $Value
+   )
+   process {
+      try { StringTo-Array $Value -AsValues | ToCobolCase }
+      catch { Write-Error "Failed to convert '$Value' to COBOL-CASE: $($_.Exception.Message)"; return $null }
+   }
 }
 
 Export-ModuleMember -Function ConvertTo-CobolCase

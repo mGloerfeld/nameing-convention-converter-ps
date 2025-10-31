@@ -35,28 +35,28 @@
    Empty or whitespace-only words are skipped.
 #>
 function ToTrainCase {
-    [CmdletBinding()]
-    [OutputType([string])]
-    param(
-        [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
-        [ValidateNotNullOrEmpty()]
-        [string[]]$Value,
-        [Parameter()] [switch] $Invariant,
-        [Parameter()] [switch] $PreserveAcronyms
-    )
-    begin {
-        $builder = New-Object System.Text.StringBuilder
-        $first = $true
-        $culture = if ($Invariant) { [System.Globalization.CultureInfo]::InvariantCulture } else { [System.Globalization.CultureInfo]::CurrentCulture }
-    }
-    process {
-        foreach ($word in $Value) {
-            if ([string]::IsNullOrWhiteSpace($word)) { continue }
-            if ($PreserveAcronyms -and $word -match '^[A-Z0-9]{2,}$') { $proper = $word }
-            elseif ($word.Length -eq 1) { $proper = $word.ToUpper($culture) }
-            else { $proper = $word.Substring(0,1).ToUpper($culture) + $word.Substring(1).ToLower($culture) }
-            if ($first) { [void]$builder.Append($proper); $first = $false } else { [void]$builder.Append('-').Append($proper) }
-        }
-    }
-    end { $builder.ToString() }
+   [CmdletBinding()]
+   [OutputType([string])]
+   param(
+      [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
+      [ValidateNotNullOrEmpty()]
+      [string[]]$Value,
+      [Parameter()] [switch] $Invariant,
+      [Parameter()] [switch] $PreserveAcronyms
+   )
+   begin {
+      $builder = New-Object System.Text.StringBuilder
+      $first = $true
+      $culture = if ($Invariant) { [System.Globalization.CultureInfo]::InvariantCulture } else { [System.Globalization.CultureInfo]::CurrentCulture }
+   }
+   process {
+      foreach ($word in $Value) {
+         if ([string]::IsNullOrWhiteSpace($word)) { continue }
+         if ($PreserveAcronyms -and $word -match '^[A-Z0-9]{2,}$') { $proper = $word }
+         elseif ($word.Length -eq 1) { $proper = $word.ToUpper($culture) }
+         else { $proper = $word.Substring(0, 1).ToUpper($culture) + $word.Substring(1).ToLower($culture) }
+         if ($first) { [void]$builder.Append($proper); $first = $false } else { [void]$builder.Append('-').Append($proper) }
+      }
+   }
+   end { $builder.ToString() }
 }

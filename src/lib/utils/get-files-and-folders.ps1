@@ -13,7 +13,7 @@
 function Get-FilesAndFolders {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory, Position=0, ValueFromPipeline, HelpMessage='Pfad zum Verzeichnis')]
+        [Parameter(Mandatory, Position = 0, ValueFromPipeline, HelpMessage = 'Pfad zum Verzeichnis')]
         [ValidateNotNullOrEmpty()]
         [string] $Path
     )
@@ -26,8 +26,8 @@ function Get-FilesAndFolders {
             }
             Get-ChildItem -Path $Path -Recurse | ForEach-Object {
                 [PSCustomObject]@{
-                    Type = if ($_.PSIsContainer) { 'Ordner' } else { 'Datei' }
-                    Name = $_.Name
+                    Type     = if ($_.PSIsContainer) { 'Ordner' } else { 'Datei' }
+                    Name     = $_.Name
                     FullName = $_.FullName
                 }
             }

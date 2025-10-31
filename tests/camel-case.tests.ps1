@@ -1,20 +1,20 @@
 
 BeforeAll { 
     # Get correct file name 
-    $file = $(Split-Path $PSCommandPath -leaf).Replace('.tests.ps1','.psm1')
+    $file = $(Split-Path $PSCommandPath -leaf).Replace('.tests.ps1', '.psm1')
  
     # Import buisness module 
-    Import-Module  $(Join-Path -Path $(Get-Location) -ChildPath $("/src/lib/" +  $file ))
+    Import-Module  $(Join-Path -Path $(Get-Location) -ChildPath $("/src/lib/" + $file ))
 }
 
 Describe 'ConvertTo-CamelCase' {
 
     Context 'Basic conversions' {
         It 'Returns <expected> (<value>)' -ForEach @(
-            @{ value = 'Hello world';                       expected = 'helloWorld' }
+            @{ value = 'Hello world'; expected = 'helloWorld' }
             @{ value = "  Hello	heros from powerShell !  "; expected = 'helloHerosFromPowerShell' }
-            @{ value = 'Multiple   space   segments';       expected = 'multipleSpaceSegments' }
-            @{ value = 'SINGLE';                            expected = 'single' }
+            @{ value = 'Multiple   space   segments'; expected = 'multipleSpaceSegments' }
+            @{ value = 'SINGLE'; expected = 'single' }
         ) {
             ConvertTo-CamelCase -Value $value | Should -Be $expected
         }

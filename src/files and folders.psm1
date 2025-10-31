@@ -29,7 +29,7 @@
 function filesAndFolders {
     [CmdletBinding()] [OutputType([pscustomobject])]
     param(
-        [Parameter(Mandatory, Position=0)]
+        [Parameter(Mandatory, Position = 0)]
         [ValidateNotNullOrEmpty()]
         [string] $Path,
 

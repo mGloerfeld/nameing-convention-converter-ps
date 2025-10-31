@@ -1,19 +1,19 @@
 
 BeforeAll { 
     # Get correct file name 
-    $file = $(Split-Path $PSCommandPath -leaf).Replace('.tests.ps1','.psm1')
+    $file = $(Split-Path $PSCommandPath -leaf).Replace('.tests.ps1', '.psm1')
  
     # Import buisness module 
-    Import-Module  $(Join-Path -Path $(Get-Location) -ChildPath $("/src/lib/" +  $file ))
+    Import-Module  $(Join-Path -Path $(Get-Location) -ChildPath $("/src/lib/" + $file ))
 }
 
 Describe 'ConvertTo-PascalSnakeCase' {
     Context 'Basic conversions' {
         It 'Returns <expected> (<value>)' -ForEach @(
-            @{ value = 'Hello world!';                       expected = 'Hello_World' }
+            @{ value = 'Hello world!'; expected = 'Hello_World' }
             @{ value = "  Hello	heros from powerShell !  "; expected = 'Hello_Heros_From_PowerShell' }
-            @{ value = 'Multiple   space   segments';       expected = 'Multiple_Space_Segments' }
-            @{ value = 'SINGLE';                            expected = 'Single' }
+            @{ value = 'Multiple   space   segments'; expected = 'Multiple_Space_Segments' }
+            @{ value = 'SINGLE'; expected = 'Single' }
         ) {
             ConvertTo-PascalSnakeCase -Value $value | Should -Be $expected
         }

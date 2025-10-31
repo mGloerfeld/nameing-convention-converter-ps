@@ -18,15 +18,15 @@
    Returns empty string if no segments found.
 #>
 function ConvertTo-TrainCase {
-    [CmdletBinding()] param(
-        [Parameter(Mandatory, Position=0, ValueFromPipeline)]
-        [ValidateNotNullOrEmpty()]
-        [string] $Value
-    )
-    process {
-        try { StringTo-Array $Value -AsValues | ToTrainCase }
-        catch { Write-Error "Failed to convert '$Value' to Train-Case: $($_.Exception.Message)"; return $null }
-    }
+   [CmdletBinding()] param(
+      [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
+      [ValidateNotNullOrEmpty()]
+      [string] $Value
+   )
+   process {
+      try { StringTo-Array $Value -AsValues | ToTrainCase }
+      catch { Write-Error "Failed to convert '$Value' to Train-Case: $($_.Exception.Message)"; return $null }
+   }
 }
 
 Export-ModuleMember -Function ConvertTo-TrainCase

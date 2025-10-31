@@ -65,7 +65,7 @@ function ConvertTo-CamelSnakeCase {
                         $result += "_" + $seg.ToUpper()
                     }
                     else {
-                        $result += "_" + $seg.Substring(0,1).ToUpper() + $seg.Substring(1).ToLower()
+                        $result += "_" + $seg.Substring(0, 1).ToUpper() + $seg.Substring(1).ToLower()
                     }
                 }
             }

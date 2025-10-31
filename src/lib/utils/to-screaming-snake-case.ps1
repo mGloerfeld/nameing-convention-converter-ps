@@ -34,25 +34,25 @@
    Empty or whitespace-only words are skipped.
 #>
 function ToScreamingSnakeCase {
-    [CmdletBinding()]
-    [OutputType([string])]
-    param(
-        [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
-        [ValidateNotNullOrEmpty()]
-        [string[]]$Value,
-        [Parameter()] [switch] $Invariant
-    )
-    begin {
-        $builder = New-Object System.Text.StringBuilder
-        $first = $true
-        $culture = if ($Invariant) { [System.Globalization.CultureInfo]::InvariantCulture } else { [System.Globalization.CultureInfo]::CurrentCulture }
-    }
-    process {
-        foreach ($word in $Value) {
-            if ([string]::IsNullOrWhiteSpace($word)) { continue }
-            $upper = $word.ToUpper($culture)
-            if ($first) { [void]$builder.Append($upper); $first = $false } else { [void]$builder.Append('_').Append($upper) }
-        }
-    }
-    end { $builder.ToString() }
+   [CmdletBinding()]
+   [OutputType([string])]
+   param(
+      [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
+      [ValidateNotNullOrEmpty()]
+      [string[]]$Value,
+      [Parameter()] [switch] $Invariant
+   )
+   begin {
+      $builder = New-Object System.Text.StringBuilder
+      $first = $true
+      $culture = if ($Invariant) { [System.Globalization.CultureInfo]::InvariantCulture } else { [System.Globalization.CultureInfo]::CurrentCulture }
+   }
+   process {
+      foreach ($word in $Value) {
+         if ([string]::IsNullOrWhiteSpace($word)) { continue }
+         $upper = $word.ToUpper($culture)
+         if ($first) { [void]$builder.Append($upper); $first = $false } else { [void]$builder.Append('_').Append($upper) }
+      }
+   }
+   end { $builder.ToString() }
 }

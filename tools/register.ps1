@@ -18,10 +18,10 @@
 	Muss als Administrator ausgeführt werden.
 	Nutzt powershell.exe. Bei Pwsh Core anpassen.
 #>
-[CmdletBinding(DefaultParameterSetName='Install')]
+[CmdletBinding(DefaultParameterSetName = 'Install')]
 param(
-	[Parameter(ParameterSetName='Install')][switch] $Install,
-	[Parameter(ParameterSetName='Uninstall')][switch] $Uninstall,
+	[Parameter(ParameterSetName = 'Install')][switch] $Install,
+	[Parameter(ParameterSetName = 'Uninstall')][switch] $Uninstall,
 	[Parameter()][string] $RootName = 'NameingConverter',
 	[Parameter()][string] $ModulePath = "$PSScriptRoot/../src/GlobeCruising.Common.NameingConventionConverter.psd1"
 )

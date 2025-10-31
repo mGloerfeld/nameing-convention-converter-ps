@@ -33,23 +33,23 @@
    Empty or whitespace-only words are skipped.
 #>
 function ToUpperFlatCase {
-    [CmdletBinding()]
-    [OutputType([string])]
-    param(
-        [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
-        [ValidateNotNullOrEmpty()]
-        [string[]]$Value,
-        [Parameter()] [switch] $Invariant
-    )
-    begin {
-        $builder = New-Object System.Text.StringBuilder
-        $culture = if ($Invariant) { [System.Globalization.CultureInfo]::InvariantCulture } else { [System.Globalization.CultureInfo]::CurrentCulture }
-    }
-    process {
-        foreach ($word in $Value) {
-            if ([string]::IsNullOrWhiteSpace($word)) { continue }
-            [void]$builder.Append($word.ToUpper($culture))
-        }
-    }
-    end { $builder.ToString() }
+   [CmdletBinding()]
+   [OutputType([string])]
+   param(
+      [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
+      [ValidateNotNullOrEmpty()]
+      [string[]]$Value,
+      [Parameter()] [switch] $Invariant
+   )
+   begin {
+      $builder = New-Object System.Text.StringBuilder
+      $culture = if ($Invariant) { [System.Globalization.CultureInfo]::InvariantCulture } else { [System.Globalization.CultureInfo]::CurrentCulture }
+   }
+   process {
+      foreach ($word in $Value) {
+         if ([string]::IsNullOrWhiteSpace($word)) { continue }
+         [void]$builder.Append($word.ToUpper($culture))
+      }
+   }
+   end { $builder.ToString() }
 }

@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "prettier-plugin-powershell": "^1.0.4"
+  }
+}

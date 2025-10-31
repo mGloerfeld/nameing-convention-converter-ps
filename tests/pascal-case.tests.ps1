@@ -1,19 +1,19 @@
 
 BeforeAll { 
     # Get correct file name 
-    $file = $(Split-Path $PSCommandPath -leaf).Replace('.tests.ps1','.psm1')
+    $file = $(Split-Path $PSCommandPath -leaf).Replace('.tests.ps1', '.psm1')
  
     # Import buisness module 
-    Import-Module  $(Join-Path -Path $(Get-Location) -ChildPath $("/src/lib/" +  $file ))
+    Import-Module  $(Join-Path -Path $(Get-Location) -ChildPath $("/src/lib/" + $file ))
 }
 
 Describe 'ConvertTo-PascalCase' {
     Context 'Basic conversions' {
         It 'Returns <expected> (<value>)' -ForEach @(
-            @{ value = 'Hello world!';                       expected = 'HelloWorld' }
+            @{ value = 'Hello world!'; expected = 'HelloWorld' }
             @{ value = "  Hello	heros from powerShell !  "; expected = 'HelloHerosFromPowerShell' }
-            @{ value = 'Multiple   space   segments';       expected = 'MultipleSpaceSegments' }
-            @{ value = 'SINGLE';                            expected = 'Single' }
+            @{ value = 'Multiple   space   segments'; expected = 'MultipleSpaceSegments' }
+            @{ value = 'SINGLE'; expected = 'Single' }
         ) {
             ConvertTo-PascalCase -Value $value | Should -Be $expected
         }

@@ -20,7 +20,7 @@
    @("my", "class", "name") | ToPascalSnakeCase
    Returns: "My_Class_Name"
 
-.INPUTS
+.INPUTSF
    String[]
    An array of strings representing individual words.
 
@@ -55,10 +55,12 @@ function ToPascalSnakeCase {
             $segment = $word
             if ($PreserveAcronyms -and $segment -match '^[A-Z0-9]{2,}$') {
                 $proper = $segment
-            } elseif ($segment.Length -eq 1) {
+            }
+            elseif ($segment.Length -eq 1) {
                 $proper = $segment.ToUpper($culture)
-            } else {
-                $proper = $segment.Substring(0,1).ToUpper($culture) + $segment.Substring(1).ToLower($culture)
+            }
+            else {
+                $proper = $segment.Substring(0, 1).ToUpper($culture) + $segment.Substring(1).ToLower($culture)
             }
             if ($first) { [void]$builder.Append($proper); $first = $false } else { [void]$builder.Append('_').Append($proper) }
         }
