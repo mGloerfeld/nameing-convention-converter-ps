@@ -27,31 +27,34 @@
 #>
 function ToCamelSnakeCase {
     [CmdletBinding()]
+    [OutputType([string])]
     param (
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
-        [ValidateNotNull()]
-        [String[]] $value 
+        [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
+        [ValidateNotNullOrEmpty()]
+        [String[]] $Value,
+        [Parameter()] [switch] $Invariant
     )
- 
     BEGIN {
-        $result = ""
+        $builder = New-Object System.Text.StringBuilder
         $isFirstWord = $true
+        $culture = if ($Invariant) { [System.Globalization.CultureInfo]::InvariantCulture } else { [System.Globalization.CultureInfo]::CurrentCulture }
     }
-
     PROCESS {
-        if ($isFirstWord) {
-            # First word should be lowercase
-            $result += $value.ToLower()
-            $isFirstWord = $false
-        }
-        else {
-            # Subsequent words should be capitalized and preceded by underscore
-            $capitalizedWord = $value.Substring(0, 1).ToUpper() + $value.Substring(1).ToLower()
-            $result += "_" + $capitalizedWord
+        foreach ($word in $Value) {
+            if ([string]::IsNullOrWhiteSpace($word)) { continue }
+            if ($isFirstWord) {
+                [void]$builder.Append($word.ToLower($culture))
+                $isFirstWord = $false
+            }
+            else {
+                if ($word.Length -eq 1) {
+                    [void]$builder.Append('_').Append($word.ToUpper($culture))
+                } else {
+                    $cap = $word.Substring(0,1).ToUpper($culture) + $word.Substring(1).ToLower($culture)
+                    [void]$builder.Append('_').Append($cap)
+                }
+            }
         }
     }
-
-    END {
-        return $result
-    }
+    END { $builder.ToString() }
 }
