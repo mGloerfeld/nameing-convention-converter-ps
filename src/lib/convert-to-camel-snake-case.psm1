@@ -1,6 +1,6 @@
 . $PSScriptRoot"\utils\string-to-array.ps1"
 . $PSScriptRoot"\utils\to-camel-snake-case.ps1"
-
+1
 <#
 .SYNOPSIS
    Converts text into camel_Snake_Case format.

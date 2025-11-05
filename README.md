@@ -173,20 +173,35 @@ ModuleType  Version  PreRelease  Name                                         Ex
 Manifest    1.0.1                GlobeCruising.Common.NameingStringConverter  {Add-Content, Clear-Cont...
 ```
 
-### Use as offline module
+### Offline-Installation (manuell)
 
-PowerShell uses several folders in which modules are searched for. The command **`$env:PSModulePath`** lists all module folders in which modules are searched for. These paths are commonly used on a Windows system. `C:\Program Files\PowerShell\Modules`, `C:\program files\powershell\7\Modules`, `C:\Program Files\WindowsPowerShell\Modules`, `C:\Windows\system32\WindowsPowerShell\v1.0\Modules`, `C:\Users\<user>\OneDrive\Documents\PowerShell\Modules`
-Download current releases [here](https://github.com/mGloerfeld/nameing-convention-converter/releases) and exctract to your preferd folder e.g. 'C:\program files\powershell\7\Modules'.
+Zur manuellen Nutzung ohne PowerShell Gallery lädst du das aktuelle Release als ZIP von den [Releases](https://github.com/mGloerfeld/nameing-convention-converter/releases) herunter und entpackst es in einen der Verzeichnispfade, die PowerShell beim Modul-Laden durchsucht.
+
+Typische Suchpfade (Anzeige mit `$env:PSModulePath`):
+`C:\Program Files\PowerShell\Modules`, `C:\Program Files\WindowsPowerShell\Modules`, `C:\Windows\system32\WindowsPowerShell\v1.0\Modules`, `C:\Users\<Benutzer>\Documents\PowerShell\Modules`
+
+Empfehlung: Für eine benutzerbezogene Installation verwende den Pfad `C:\Users\<Benutzer>\Documents\PowerShell\Modules`. Für eine systemweite Installation (alle Benutzer) benötigst du Admin-Rechte und kannst z.B. `C:\Program Files\PowerShell\Modules` nutzen.
+
+Schritte:
+1. ZIP herunterladen.
+2. Entpacken und sicherstellen, dass der entpackte Ordner exakt `CaseStyleConverter` heißt (Name muss dem `.psd1` entsprechen).
+3. Ordner in einen gültigen Suchpfad verschieben oder kopieren.
+4. Optional: Eigenen Pfad ergänzen: `$env:PSModulePath += ';D:\MeineModule'`.
+5. Modul importieren und prüfen.
 
 ```PowerShell
-# Check if module is loaded
-$> Get-Module -Name GlobeCruising.Common.StringConverter
+# Suchpfade anzeigen
+$env:PSModulePath -split ';'
 
-# OUTPUT:
-ModuleType  Version  PreRelease  Name                                         ExportedCommands
-----------  -------  ----------  ----                                         ----------------
-Manifest    1.0.1                GlobeCruising.Common.NameingStringConverter  {Add-Content,Clear-Cont...
+# Modul manuell laden (falls nicht automatisch)
+Import-Module CaseStyleConverter -Verbose
+Import-Module -Name "C:\Users\XMG15\source\repos\nameing-convention-converter-ps\src\CaseStyleConverter.psd1" -Verbose -Force
+
+# Prüfung ob geladen
+Get-Module GlobeCruising.Common.NameingConventionConverter | Format-Table Name,Version,Path
 ```
+
+Hinweis: In älteren Beispielen taucht teilweise ein abweichender Name (`StringConverter`) auf – maßgeblich ist der Manifestname `GlobeCruising.Common.NameingConventionConverter`.
 
 ### Use inside scripts
 

@@ -1,98 +1,104 @@
-
 <#
 .SYNOPSIS
-   Converts an array of words into camelCase format.
+    Konvertiert einen Eingabestring in camelCase.
 
 .DESCRIPTION
-   Takes a sequence of words (typically produced by StringTo-Array) and returns a single
-   camelCase string. The first word is fully lowercased. Subsequent words have their first
-   letter uppercased and the remainder lowercased. Optional switches allow preserving fully
-   uppercased acronyms (e.g. "API") and using culture invariant casing rules.
+    Diese Funktion nimmt einen String entgegen und wandelt ihn in camelCase um.
+    Dabei werden einzelne Wörter erkannt und entsprechend formatiert:
+    - Das erste Wort wird vollständig kleingeschrieben.
+    - Nachfolgende Wörter werden mit großem Anfangsbuchstaben geschrieben.
+    - Optional können Sonderzeichen entfernt werden.
+    - Optional können Akronyme (z. B. "API", "ID") erhalten bleiben.
+    - Optional kann die Kulturwahl auf Invariant gesetzt werden.
 
 .PARAMETER Value
-   Sequence of word segments to convert.
+    Der Eingabestring, der konvertiert werden soll.
 
 .PARAMETER PreserveAcronyms
-   If set, words that are entirely uppercase and length > 1 are preserved as-is (e.g. "API").
+    Wenn gesetzt, bleiben Wörter in Großbuchstaben (z. B. "API") unverändert erhalten.
 
 .PARAMETER Invariant
-   If set, uses culture invariant ToLower/ToUpper operations for deterministic casing.
+    Wenn gesetzt, wird die InvariantCulture für die Groß-/Kleinschreibung verwendet.
 
+ 
 .EXAMPLE
-   @("hello", "world") | ToCamelCase
-   Returns: "helloWorld"
-
-.EXAMPLE
-   @("my", "API", "client") | ToCamelCase -PreserveAcronyms
-   Returns: "myAPIClient"
-
-.EXAMPLE
-   @("straße", "über") | ToCamelCase -Invariant
-   Returns: "strasseUber" (culture invariant handling of ß -> ss may vary by .NET version)
-
-.INPUTS
-   String[]
-
-.OUTPUTS
-   String
+    ToCamelCase "mein_test_string" -KeepSpecialChars -PreserveAcronyms
+    # -> "meinTestString"
 
 .NOTES
-   - Empty or whitespace-only segments are skipped.
-   - Acronym preservation only applies to segments matching ^[A-Z0-9]{2,}$.
-   - Invariant switch uses [CultureInfo]::InvariantCulture for casing.
+    Die Funktion ist pipeline-fähig.
 #>
-function ToCamelCase {
-    [CmdletBinding()] param(
-        [Parameter(Mandatory, Position = 0, ValueFromPipeline)]
-        [ValidateNotNullOrEmpty()]
-        [string[]] $Value,
 
-        [Parameter()] [switch] $PreserveAcronyms,
-        [Parameter()] [switch] $Invariant
+. "$PSScriptRoot\filter-string.ps1"
+. "$PSScriptRoot\string-to-array.ps1"
+function ToCamelCase {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true, ValueFromPipeline)]
+        [string]$Value,
+
+        [Parameter()]
+        [switch]$PreserveAcronyms,
+
+        [Parameter()]
+        [switch]$Invariant,
+
+        [Parameter()]
+        [switch]$KeepSpecialChars
     )
 
     begin {
-        $builder = New-Object System.Text.StringBuilder
-        $isFirst = $true
-        if ($Invariant) { $culture = [System.Globalization.CultureInfo]::InvariantCulture } else { $culture = [System.Globalization.CultureInfo]::CurrentCulture }
+        $inputBuffer = @()
+        $culture = if ($Invariant.IsPresent) {
+            [System.Globalization.CultureInfo]::InvariantCulture
+        }
+        else {
+            [System.Globalization.CultureInfo]::CurrentCulture
+        }
     }
 
     process {
-        try {
-            foreach ($word in $Value) {
+        $inputBuffer += , $Value
+    }
+
+    end {
+        $segments = @()
+
+        foreach ($item in $inputBuffer) {
+            # Sonderzeichen entfernen, falls nicht erlaubt
+            $filtered = if ($KeepSpecialChars) {
+                $item
+            }
+            else {
+                ([regex]::Replace($item, '[^\\p{L}\\p{N} \-_]', ''))
+            }
+
+            # In Wörter zerlegen
+            $words = $filtered | StringTo-Array -AsValues
+
+            $builder = [System.Text.StringBuilder]::new()
+            $isFirst = $true
+
+            foreach ($word in $words) {
                 if ([string]::IsNullOrWhiteSpace($word)) { continue }
 
-                $segment = $word
-                # Invariant or culture specific normalization (lower for first pass)
-                $lower = $segment.ToLower($culture)
-
                 if ($isFirst) {
-                    # first word -> fully lower
-                    [void]$builder.Append($lower)
+                    [void]$builder.Append($word.ToLower($culture))
                     $isFirst = $false
                     continue
                 }
 
-                if ($PreserveAcronyms -and $segment -match '^[A-Z0-9]{2,}$') {
-                    # preserve acronym exactly
-                    [void]$builder.Append($segment)
-                    continue
-                }
-
-                if ($segment.Length -eq 1) {
-                    [void]$builder.Append($segment.ToUpper($culture))
+                if ($PreserveAcronyms.IsPresent -and $word -match '^[A-Z0-9]{2,}$') {
+                    [void]$builder.Append($word)
                 }
                 else {
-                    $first = $segment.Substring(0, 1).ToUpper($culture)
-                    $rest = $segment.Substring(1).ToLower($culture)
+                    $first = $word.Substring(0, 1).ToUpper($culture)
+                    $rest = if ($word.Length -gt 1) { $word.Substring(1).ToLower($culture) } else { '' }
                     [void]$builder.Append($first + $rest)
                 }
             }
-        }
-        catch {
-            Write-Error "Failed processing segment '$word': $($_.Exception.Message)"
+
+            Write-Output $builder.ToString()
         }
     }
-
-    end { $builder.ToString() }
 }

@@ -1,62 +1,73 @@
-. $PSScriptRoot"\utils\string-to-array.ps1"
-. $PSScriptRoot"\utils\to-camel-case.ps1"
-
 <#
 .SYNOPSIS
-   Converts text into camelCase.
+    Konvertiert einen Eingabestring in camelCase.
 
 .DESCRIPTION
-   Converts any text into camelCase notation. The first word is entirely lowercase,
-   and subsequent words have their first letter capitalized. All unnecessary spaces
-   and special characters are filtered out.
+    Diese Funktion nimmt einen String entgegen und wandelt ihn mithilfe der Hilfsfunktion `ToCamelCase` in camelCase um.
+    Dabei können optional Sonderzeichen entfernt, Akronyme erhalten und die Kulturwahl beeinflusst werden.
+    Zusätzlich kann eine Zeichenliste angegeben werden, die beim Filtern erlaubt bleiben soll.
 
 .PARAMETER Value
-   The input string to be converted to camelCase. Required.
-   
-.EXAMPLE
-   ConvertTo-CamelCase "Hello world"
-   Returns: helloWorld
+    Der Eingabestring, der konvertiert werden soll.
+
+.PARAMETER PreserveAcronyms
+    Wenn gesetzt, bleiben Wörter in Großbuchstaben (z. B. "API") unverändert erhalten.
+
+.PARAMETER Invariant
+    Wenn gesetzt, wird die InvariantCulture für die Groß-/Kleinschreibung verwendet.
+
+.PARAMETER StripSpecial
+    Wenn gesetzt, werden Sonderzeichen entfernt (über `ToCamelCase` → `filter-string`).
+
+.PARAMETER AllowCharacters
+    Ein optionaler String mit zusätzlichen erlaubten Zeichen, die beim Filtern nicht entfernt werden sollen.
+    Muss ein regulärer Ausdruck ohne eckige Klammern sein.
 
 .EXAMPLE
-   ConvertTo-CamelCase "my variable name"
-   Returns: myVariableName
-
-.INPUTS
-   System.String
-   Any string input like 'Hello world!' or 'my-variable-name'.
-
-.OUTPUTS
-   System.String
-   A converted string in camelCase format like 'helloWorld'.
+    ConvertTo-CamelCase "mein_test_string" -StripSpecial -PreserveAcronyms
+    # -> "meinTestString"
 
 .NOTES
-   - Removes all leading, trailing, and special characters
-   - Only preserves alphanumeric characters
-   - The first word is entirely lowercase
-   - Subsequent words have their first letter capitalized
+    Die Funktion ist pipeline-fähig und Teil eines Moduls.
 #>
-function ConvertTo-CamelCase {
-   [CmdletBinding()]
-   param(
-      [Parameter(
-         Mandatory = $true,
-         Position = 0,
-         ValueFromPipeline = $true,
-         HelpMessage = "The string to convert to camelCase"
-      )]
-      [ValidateNotNullOrEmpty()]
-      [string]$Value
-   )
 
-   process {
-      try {
-         return StringTo-Array $Value | ToCamelCase
-      }
-      catch {
-         Write-Error "Failed to convert '$Value' to camelCase: $($_.Exception.Message)"
-         return $null
-      }
-   }
+# Hilfsfunktionen einbinden
+. "$PSScriptRoot\utils\to-camel-case.ps1"
+
+function ConvertTo-CamelCase {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline, HelpMessage = "The string to convert to camelCase")]
+        [ValidateNotNullOrEmpty()]
+        [string]$Value,
+
+        [Parameter()]
+        [switch]$PreserveAcronyms,
+
+        [Parameter()]
+        [switch]$Invariant,
+
+        [Parameter()]
+        [switch]$KeepSpecialChars
+    )
+
+    process {
+        try {
+            Write-Verbose "[ConvertTo-CamelCase] Input: '$Value'"
+
+            # Übergabe der Parameter an die Hilfsfunktion ToCamelCase
+            $result = $Value | ToCamelCase -PreserveAcronyms -KeepSpecialChars
+ 
+            Write-Verbose "[ConvertTo-CamelCase] Output: '$result'"
+            return $result
+        }
+        catch {
+            Write-Error "Fehler bei der Konvertierung von '$Value' zu camelCase: $($_.Exception.Message)"
+            Write-Error $_.ScriptStackTrace
+            return $null
+        }
+    }
 }
 
+# Funktion für Modulexport freigeben
 Export-ModuleMember -Function ConvertTo-CamelCase

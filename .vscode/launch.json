@@ -12,9 +12,11 @@
             "cwd": "${cwd}"
         },
         {
-            "name": "PowerShell Attach to Host Process",
             "type": "PowerShell",
-            "request": "attach"
+            "request": "launch",
+            "name": "Convert-to-camel-case",
+            "script": "${workspaceFolder}/tests/camel-case.tests.ps1",
+            "args": []
         }
     ]
 }
