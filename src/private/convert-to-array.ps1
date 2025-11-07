@@ -1,4 +1,4 @@
-function StringTo-Array {
+function ConvertTo-Array {
    <#
    .SYNOPSIS
       Splits an input string into word segments using Unicode letter/number detection.
@@ -14,7 +14,7 @@ function StringTo-Array {
       Return an array of plain strings instead of Match objects.
 
    .EXAMPLE
-      "Hello world!" | StringTo-Array -AsValues
+      "Hello world!" | ConvertTo-Array -AsValues
       Returns: @("Hello", "world")
 
    .INPUTS
@@ -27,35 +27,44 @@ function StringTo-Array {
    param(
       [Parameter(Mandatory = $true, ValueFromPipeline)]
       [string]$Value,
-      [Parameter()] [switch] $AsValues
+
+      [Parameter()]
+      [switch]$AsValues
    )
 
    begin {
+      # Initialize a buffer to collect input from the pipeline
       $inputBuffer = @()
-
    }
 
    process {
-      # Eingabewerte sammeln (für Pipeline-Unterstützung)
+      # Collect each input value into the buffer (supports pipeline input)
       $inputBuffer += , $Value
    }
 
    end {
- 
       try {
+         # Define a regex pattern to match Unicode letters and numbers
          $pattern = '[\p{L}\p{N}]+'
+
+         # Create a regex object from the pattern
          $regex = [regex]$pattern
+
+         # Apply the regex to the collected input
          $matches = $regex.Matches($inputBuffer)
 
+         # If -AsValues is specified, return only the matched strings
          if ($AsValues) {
             $matches | ForEach-Object { $_.Value }
          }
          else {
+            # Otherwise, return the full Match objects
             $matches
          }
       }
       catch {
-         Write-Error "Fehler beim Verarbeiten des Strings '$Value': $($_.Exception.Message)"
+         # Handle any errors and output a meaningful message
+         Write-Error "Error processing string '$Value': $($_.Exception.Message)"
       }
    }
 }

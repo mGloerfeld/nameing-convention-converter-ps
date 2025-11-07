@@ -1,4 +1,4 @@
-
+﻿
 BeforeAll { 
     # Get correct file name 
     $file = $(Split-Path $PSCommandPath -leaf).Replace('.tests.ps1', '.psm1')

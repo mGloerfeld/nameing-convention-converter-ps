@@ -1,3 +1,4 @@
+ 
 <#
 .SYNOPSIS
     Konvertiert einen Eingabestring in camelCase.
@@ -32,13 +33,13 @@
 #>
 
 # Hilfsfunktionen einbinden
-. "$PSScriptRoot\utils\to-camel-case.ps1"
+. "$PSScriptRoot\CamelCase.ps1"
 
 function ConvertTo-CamelCase {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline, HelpMessage = "The string to convert to camelCase")]
-        [ValidateNotNullOrEmpty()]
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName, HelpMessage = "The string to convert to camelCase")]
+        [AllowNull()]
         [string]$Value,
 
         [Parameter()]
@@ -51,20 +52,32 @@ function ConvertTo-CamelCase {
         [switch]$KeepSpecialChars
     )
 
-    process {
-        try {
-            Write-Verbose "[ConvertTo-CamelCase] Input: '$Value'"
+    begin {
+        $inputBuffer = @()
+    }
 
-            # Übergabe der Parameter an die Hilfsfunktion ToCamelCase
-            $result = $Value | ToCamelCase -PreserveAcronyms -KeepSpecialChars
- 
-            Write-Verbose "[ConvertTo-CamelCase] Output: '$result'"
-            return $result
-        }
-        catch {
-            Write-Error "Fehler bei der Konvertierung von '$Value' zu camelCase: $($_.Exception.Message)"
-            Write-Error $_.ScriptStackTrace
-            return $null
+    process {
+        $inputBuffer += , $Value
+    }
+
+    end {
+        foreach ($item in $inputBuffer) {
+            if ($null -eq $item -or $item -eq '') {
+                Write-Verbose "[ConvertTo-CamelCase] Input is null or empty. Returning empty string."
+                Write-Output ''
+                continue
+            }
+            try {
+                Write-Verbose "[ConvertTo-CamelCase] Input: '$item'"
+                $result = $item | ToCamelCase  -PreserveAcronyms
+                Write-Verbose "[ConvertTo-CamelCase] Output: '$result'"
+                Write-Output $result
+            }
+            catch {
+                Write-Error "Fehler bei der Konvertierung von '$item' zu camelCase: $($_.Exception.Message)"
+                Write-Error $_.ScriptStackTrace
+                Write-Output ''
+            }
         }
     }
 }
