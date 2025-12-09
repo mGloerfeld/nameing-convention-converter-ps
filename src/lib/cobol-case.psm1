@@ -1,4 +1,4 @@
-. $PSScriptRoot"\utils\string-to-array.ps1"
+﻿. $PSScriptRoot"\utils\to-word-array.ps1"
 . $PSScriptRoot"\utils\to-cobol-case.ps1"
 
 <#
@@ -17,14 +17,14 @@
 #>
 function ConvertTo-CobolCase {
 
-      param
+   param
    (
-      [parameter(Mandatory=$true, Position=0)]
+      [parameter(Mandatory = $true, Position = 0)]
       [ValidateNotNull()]
       [string] $value
    )
   
-     return  StringTo-Array $value | ToCobolCase    
+   return  ConvertTo-WordArray $value | ToCobolCase    
 }
 
 Export-ModuleMember -Function ConvertTo-CobolCase

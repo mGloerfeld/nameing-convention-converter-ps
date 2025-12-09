@@ -1,4 +1,4 @@
-
+﻿
 function ToTrainCase() {
     
  param
@@ -22,3 +22,4 @@ function ToTrainCase() {
    return $str.Substring(0, $str.Length - 1)
    }
 }
+

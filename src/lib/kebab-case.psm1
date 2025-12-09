@@ -1,4 +1,4 @@
-. $PSScriptRoot"\utils\string-to-array.ps1"
+﻿. $PSScriptRoot"\utils\to-word-array.ps1"
 . $PSScriptRoot"\utils\to-kebab-case.ps1"
 
 <#
@@ -19,14 +19,14 @@
 #>
 function ConvertTo-KebabCase {
 
-      param
+   param
    (
-      [parameter(Mandatory=$true, Position=0)]
+      [parameter(Mandatory = $true, Position = 0)]
       [ValidateNotNull()]
       [string] $value
    )
   
-     return  StringTo-Array $value | ToKebabCase
+   return  ConvertTo-WordArray $value | ToKebabCase
 }
 
 Export-ModuleMember -Function ConvertTo-KebabCase

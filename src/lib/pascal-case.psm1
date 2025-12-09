@@ -1,4 +1,4 @@
-. $PSScriptRoot"\utils\string-to-array.ps1"
+﻿. $PSScriptRoot"\utils\to-word-array.ps1"
 . $PSScriptRoot"\utils\to-pascal-case.ps1"
 
 <#
@@ -17,14 +17,14 @@
 #>
 function ConvertTo-PascalCase {
 
-      param
+   param
    (
-      [parameter(Mandatory=$true, Position=0)]
+      [parameter(Mandatory = $true, Position = 0)]
       [ValidateNotNull()]
       [string] $value
    )
   
-     return  StringTo-Array $value | ToPascalCase  
+   return  ConvertTo-WordArray $value | ToPascalCase  
 }
 
 Export-ModuleMember -Function ConvertTo-PascalCase

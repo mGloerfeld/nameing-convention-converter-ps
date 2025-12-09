@@ -1,5 +1,6 @@
-. $PSScriptRoot"\utils\string-to-array.ps1"
+﻿. $PSScriptRoot"\utils\to-word-array.ps1"
 . $PSScriptRoot"\utils\to-upper-flat-case.ps1"
+         
 
 <#
 .Synopsis
@@ -17,14 +18,14 @@
 #>
 function ConvertTo-UpperFlatCase {
 
-      param
+   param
    (
-      [parameter(Mandatory=$true, Position=0)]
+      [parameter(Mandatory = $true, Position = 0)]
       [ValidateNotNull()]
       [string] $value
    )
   
-     return  StringTo-Array $value | ToUpperFlatCase
+   return  ConvertTo-WordArray $value | ToUpperFlatCase
 }
 
-Export-ModuleMember -Function ConvetTo-UpperFlatCase
+Export-ModuleMember -Function ConvertTo-UpperFlatCase

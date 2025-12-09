@@ -10,3 +10,4 @@ Import-Module $PSScriptRoot"\lib\screaming-snake-case.psm1"
 Import-Module $PSScriptRoot"\lib\snake-case.psm1"
 Import-Module $PSScriptRoot"\lib\train-case.psm1"
 Import-Module $PSScriptRoot"\lib\upper-flat-case.psm1"
+ 

@@ -1,4 +1,4 @@
-
+﻿
 function ToScreamingSnakeCase() {
     
  param
@@ -21,3 +21,4 @@ function ToScreamingSnakeCase() {
    return $str.Substring(0, $str.Length - 1)
    }
 }
+

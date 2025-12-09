@@ -1,4 +1,4 @@
-
+﻿
 function ToPascalCase() {
     
  param
@@ -21,3 +21,4 @@ function ToPascalCase() {
    return $str
    }
 }
+

@@ -1,4 +1,4 @@
-. $PSScriptRoot"\utils\string-to-array.ps1"
+﻿. $PSScriptRoot"\utils\to-word-array.ps1"
 . $PSScriptRoot"\utils\to-snake-case.ps1"
 
 <#
@@ -17,14 +17,14 @@
 #>
 function ConvertTo-SnakeCase {
 
-      param
+   param
    (
-      [parameter(Mandatory=$true, Position=0)]
+      [parameter(Mandatory = $true, Position = 0)]
       [ValidateNotNull()]
       [string] $value
    )
   
-     return  StringTo-Array $value | ToSnakeCase   
+   return  ConvertTo-WordArray $value | ToSnakeCase   
 }
 
 Export-ModuleMember -Function ConvertTo-SnakeCase

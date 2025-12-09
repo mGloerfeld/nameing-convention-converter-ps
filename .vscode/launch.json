@@ -2,7 +2,7 @@
     "version": "1.0.1",
     "configurations": [
         {
-            "name": "Run Pester tests",
+            "name": "Run tests (Pester)",
             "type": "PowerShell",
             "request": "launch",
             "script": "Invoke-Pester",

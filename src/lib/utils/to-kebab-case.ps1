@@ -1,4 +1,4 @@
-
+﻿
 function ToKebabCase() {
     
  param
@@ -22,3 +22,4 @@ function ToKebabCase() {
    return $str.Substring(0, $str.Length - 1)
    }
 }
+

@@ -1,4 +1,4 @@
-. $PSScriptRoot"\utils\string-to-array.ps1"
+﻿. $PSScriptRoot"\utils\to-word-array.ps1"
 . $PSScriptRoot"\utils\to-train-case.ps1"
 
 <#
@@ -24,7 +24,7 @@ function ConvertTo-TrainCase {
       [string] $value
    )
   
-     return  StringTo-Array $value | ToTrainCase
+     return  ConvertTo-WordArray $value | ToTrainCase
 }
 
 Export-ModuleMember -Function ConvertTo-TrainCase

@@ -1,4 +1,4 @@
-
+﻿
 function ToCamelSnakeCase() {
     
  param
@@ -21,3 +21,4 @@ function ToCamelSnakeCase() {
    return $str.Substring(0, $str.Length - 1)
    }
 }
+

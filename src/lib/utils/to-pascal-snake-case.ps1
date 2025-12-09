@@ -1,4 +1,4 @@
-
+﻿
 function ToPascalSnakeCase() {
     
  param
@@ -21,3 +21,4 @@ function ToPascalSnakeCase() {
    return $str.Substring(0, $str.Length - 1)
    }
 }
+

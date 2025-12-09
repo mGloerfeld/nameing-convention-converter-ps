@@ -1,23 +1,25 @@
-
+﻿
 function ToUpperFlatCase() {
     
- param
+   param
    (
-      [Parameter(Mandatory=$true, Position=0, ValueFromPipeline = $true)]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
       [ValidateNotNull()]
       [String[]] $value 
    )
  
- BEGIN {
-  $str = "";
- }
+   BEGIN {
+      $str = "";
+   }
 
- PROCESS {
+   PROCESS {
       
-          $str += $value.ToUpper();
- }
+      $str += $value.ToUpper();
+   }
 
-  END {
-   return $str
+   END {
+      return $str
    }
 }
+
+ 

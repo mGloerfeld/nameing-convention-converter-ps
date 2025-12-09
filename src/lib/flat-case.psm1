@@ -1,4 +1,4 @@
-. $PSScriptRoot"\utils\string-to-array.ps1"
+﻿. $PSScriptRoot"\utils\to-word-array.ps1"
 . $PSScriptRoot"\utils\to-flat-case.ps1"
 
 <#
@@ -17,14 +17,14 @@
 #>
 function ConvertTo-FlatCase {
 
-      param
+   param
    (
-      [parameter(Mandatory=$true, Position=0)]
+      [parameter(Mandatory = $true, Position = 0)]
       [ValidateNotNull()]
       [string] $value
    )
   
-     return  StringTo-Array $value | ToFlatCase
+   return  ConvertTo-WordArray $value | ToFlatCase
 }
 
 Export-ModuleMember -Function ConvertTo-FlatCase

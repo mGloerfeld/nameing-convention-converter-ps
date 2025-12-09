@@ -1,4 +1,4 @@
-
+﻿
 function ToFlatCase() {
     
  param
@@ -21,3 +21,4 @@ function ToFlatCase() {
    return $str
    }
 }
+

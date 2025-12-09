@@ -1,4 +1,4 @@
-
+﻿
 function ToCamelCase() {
     
  param
@@ -25,3 +25,4 @@ function ToCamelCase() {
    return $str
    }
 }
+
