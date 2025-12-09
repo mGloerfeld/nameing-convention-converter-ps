@@ -17,7 +17,7 @@
             "request": "launch",
             "script": "Invoke-Pester",
             "args": [
-                "-Path ${cwd}\\tests\\camel-case.tests.ps1"
+                "-Path ${cwd}\\src\\tests\\camel-case.tests.ps1"
             ],
             "cwd": "${cwd}"
         },

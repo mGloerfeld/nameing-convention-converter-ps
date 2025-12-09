@@ -31,8 +31,8 @@
     This function supports pipeline input.
 #>
 
-. "$PSScriptRoot\..\..\private\filter-string.ps1"
-. "$PSScriptRoot\..\..\private\string-to-array.ps1"
+. "$PSScriptRoot\..\..\shared\filter-string.ps1"
+. "$PSScriptRoot\..\..\shared\convert-to-array.ps1"
 
 function ToCamelCase {
     [CmdletBinding()]
@@ -79,7 +79,7 @@ function ToCamelCase {
             $filtered = $item | filter-string
 
             # Split filtered string into words
-            $words = $filtered | StringTo-Array -AsValues
+            $words = $filtered | ConvertTo-Array -AsValues
 
             $builder = [System.Text.StringBuilder]::new()
             $isFirst = $true

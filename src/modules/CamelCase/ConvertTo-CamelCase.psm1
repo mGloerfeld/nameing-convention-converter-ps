@@ -33,52 +33,55 @@
 #>
 
 # Hilfsfunktionen einbinden
-. "$PSScriptRoot\CamelCase.ps1"
+. "$PSScriptRoot\camel-case.ps1"
 
 function ConvertTo-CamelCase {
     [CmdletBinding()]
+    [OutputType([System.String])]
     param (
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName, HelpMessage = "The string to convert to camelCase")]
-        [AllowNull()]
+        [Parameter(
+            Mandatory = $true, 
+            Position = 0, 
+            ValueFromPipeline = $true,
+            ValueFromPipelineByPropertyName = $true,
+            HelpMessage = "The string to convert to camelCase"
+        )]
+        [AllowEmptyString()]
         [string]$Value,
 
-        [Parameter()]
+        [Parameter(HelpMessage = "Preserve uppercase acronyms like API, ID, etc.")]
         [switch]$PreserveAcronyms,
 
-        [Parameter()]
-        [switch]$Invariant,
-
-        [Parameter()]
-        [switch]$KeepSpecialChars
+        [Parameter(HelpMessage = "Use InvariantCulture for case operations")]
+        [switch]$Invariant
     )
 
     begin {
-        $inputBuffer = @()
+        Write-Verbose "[ConvertTo-CamelCase] Starting camelCase conversion process"
     }
 
     process {
-        $inputBuffer += , $Value
+        try {
+            if ([string]::IsNullOrWhiteSpace($Value)) {
+                Write-Verbose "[ConvertTo-CamelCase] Input is null, empty, or whitespace. Returning empty string."
+                return ""
+            }
+
+            Write-Verbose "[ConvertTo-CamelCase] Converting: '$Value'"
+            
+            $result = $Value | ToCamelCase -PreserveAcronyms:$PreserveAcronyms.IsPresent -Invariant:$Invariant.IsPresent
+            
+            Write-Verbose "[ConvertTo-CamelCase] Result: '$result'"
+            return $result
+        }
+        catch {
+            Write-Error "[ConvertTo-CamelCase] Failed to convert '$Value' to camelCase: $($_.Exception.Message)"
+            throw
+        }
     }
 
     end {
-        foreach ($item in $inputBuffer) {
-            if ($null -eq $item -or $item -eq '') {
-                Write-Verbose "[ConvertTo-CamelCase] Input is null or empty. Returning empty string."
-                Write-Output ''
-                continue
-            }
-            try {
-                Write-Verbose "[ConvertTo-CamelCase] Input: '$item'"
-                $result = $item | ToCamelCase  -PreserveAcronyms
-                Write-Verbose "[ConvertTo-CamelCase] Output: '$result'"
-                Write-Output $result
-            }
-            catch {
-                Write-Error "Fehler bei der Konvertierung von '$item' zu camelCase: $($_.Exception.Message)"
-                Write-Error $_.ScriptStackTrace
-                Write-Output ''
-            }
-        }
+        Write-Verbose "[ConvertTo-CamelCase] Conversion process completed"
     }
 }
 
