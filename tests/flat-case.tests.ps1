@@ -1,10 +1,7 @@
 ﻿
 BeforeAll { 
-    # Get correct file name 
-    $file = $(Split-Path $PSCommandPath -leaf).Replace('.tests.ps1', '.psm1')
- 
-    # Import buisness module 
-    Import-Module  $(Join-Path -Path $(Get-Location) -ChildPath $("/src/lib/" + $file ))
+    # Import the FlatCase module
+    Import-Module $(Join-Path -Path $(Get-Location) -ChildPath "src\modules\FlatCase\ConvertTo-FlatCase.psm1")
 }
 
 Describe 'Tests for ConvertTo-FlatCase.' {

@@ -1,10 +1,7 @@
 ﻿
 BeforeAll { 
-    # Get correct file name 
-    $file = $(Split-Path $PSCommandPath -leaf).Replace('.tests.ps1', '.psm1')
- 
-    # Import buisness module 
-    Import-Module  $(Join-Path -Path $(Get-Location) -ChildPath $("/src/lib/" + $file ))
+    # Import the PascalSnakeCase module
+    Import-Module $(Join-Path -Path $(Get-Location) -ChildPath "src\modules\PascalSnakeCase\ConvertTo-PascalSnakeCase.psm1")
 }
 
 Describe 'Tests for ConvertTo-PascalSnakeCase.' {

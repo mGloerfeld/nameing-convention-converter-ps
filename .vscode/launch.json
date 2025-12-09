@@ -7,16 +7,19 @@
             "request": "launch",
             "script": "Invoke-Pester",
             "args": [
-                "-Path ${cwd}\\test"
+                "-Path ${cwd}\\tests"
             ],
             "cwd": "${cwd}"
         },
         {
+            "name": "Run test CamelCase",
             "type": "PowerShell",
             "request": "launch",
-            "name": "CamelCase",
-            "script": "${workspaceFolder}/tests/camel-case.tests.ps1",
-            "args": []
-        }
+            "script": "Invoke-Pester",
+            "args": [
+                "-Path ${cwd}\\tests\\camel-case.tests.ps1"
+            ],
+            "cwd": "${cwd}"
+        },
     ]
 }

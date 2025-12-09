@@ -1,11 +1,10 @@
 ﻿
 BeforeAll { 
-    # Get correct file name 
-    $file = $(Split-Path $PSCommandPath -leaf).Replace('.tests.ps1', '.psm1')
- 
-    # Import buisness module 
-    Import-Module  $(Join-Path -Path $(Get-Location) -ChildPath $("/src/lib/" + $file ))
+    # Import the CamelCase module
+    Import-Module $(Join-Path -Path $(Get-Location) -ChildPath "src\modules\CamelCase\ConvertTo-CamelCase.psm1")
 }
+
+C:\source\repos\nameing-convention-converter-ps\src\submodules\CamelCase\ConvertTo-CamelCase.psm1
 
 Describe 'Tests for ConvertTo-CamelCase.' {
 
