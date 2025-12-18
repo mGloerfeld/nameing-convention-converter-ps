@@ -2,11 +2,15 @@
 
 <#
 .SYNOPSIS
-    Listet Dateien und Ordner in einem Pfad.
+    Listet Dateien und Ordner in einem Pfad und gibt Tupel mit Pfad, Dateiname und Extension zurück.
 
 .DESCRIPTION
-    Gibt eine Liste aller Dateien und Ordner im angegebenen Pfad zurück. Optional können auch Unterordner rekursiv berücksichtigt werden.
+    Gibt ein Array von Tupeln aller Dateien und Ordner im angegebenen Pfad zurück. Jedes Tupel enthält Pfad, Dateiname und Extension.
+    Optional können auch Unterordner rekursiv berücksichtigt werden.
     Implementierung nutzt explizite for-Schleifen statt Pipeline-Verarbeitung von Get-ChildItem.
+    Usagge:
+         -> Import-Module ".\files and folders.psm1" -Force
+         -> filesAndFolders -Path "C:\source" 
 
 .PARAMETER Path
     Der zu durchsuchende Pfad (Verzeichnis).
@@ -21,7 +25,7 @@
     filesAndFolders -Path 'C:\Temp' -Recurse
 
 .OUTPUTS
-    PSCustomObject mit Eigenschaften: Type, Name, FullName
+    PSCustomObject Array mit Eigenschaften: Pfad, Dateiname, Extension
 
 .NOTES
     Unterdrückt versteckte und System-Dateien nicht automatisch; kann bei Bedarf erweitert werden.
@@ -49,9 +53,9 @@ function filesAndFolders {
             for ($i = 0; $i -lt $items.Count; $i++) {
                 $item = $items[$i]
                 [PSCustomObject]@{
-                    Type     = if ($item.PSIsContainer) { 'Ordner' } else { 'Datei' }
-                    Name     = $item.Name
-                    FullName = $item.FullName
+                    Pfad      = $item.DirectoryName
+                    Dateiname = if ($item.PSIsContainer) { $item.Name } else { [System.IO.Path]::GetFileNameWithoutExtension($item.Name) }
+                    Extension = if ($item.PSIsContainer) { $null } else { $item.Extension }
                 }
             }
 
@@ -69,9 +73,9 @@ function filesAndFolders {
                     for ($k = 0; $k -lt $subItems.Count; $k++) {
                         $sub = $subItems[$k]
                         [PSCustomObject]@{
-                            Type     = if ($sub.PSIsContainer) { 'Ordner' } else { 'Datei' }
-                            Name     = $sub.Name
-                            FullName = $sub.FullName
+                            Pfad      = $sub.DirectoryName
+                            Dateiname = if ($sub.PSIsContainer) { $sub.Name } else { [System.IO.Path]::GetFileNameWithoutExtension($sub.Name) }
+                            Extension = if ($sub.PSIsContainer) { $null } else { $sub.Extension }
                         }
                         if ($sub.PSIsContainer) { $stack.Push($sub.FullName) }
                     }
@@ -83,5 +87,8 @@ function filesAndFolders {
         }
     }
 }
+
+# Exportiere die Funktion für die Verwendung in anderen Modulen
+Export-ModuleMember -Function filesAndFolders
 
  
